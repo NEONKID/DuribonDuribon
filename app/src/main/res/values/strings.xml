@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">DuribonDuribon</string>
-    <string name="search_hint">Search: 제2과학관 ....</string>
+    <string name="tab_Map">Map</string>
+    <string name="tab_timetable">Timetable</string>
+    <string name="Options_settings">Settings</string>
+    <string name="Timetable_add">Add</string>
+    <string name="Search_Hint">Enter Location</string>
 </resources>
