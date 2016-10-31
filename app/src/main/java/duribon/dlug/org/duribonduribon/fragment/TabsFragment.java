@@ -71,7 +71,7 @@ public class TabsFragment extends Fragment {
                 case 0:
                     return new MapFragment();
                 case 1:
-                    return CurrentFragment.CurrentFragment(position);
+                    return new TimetableFragment();
             }
             return null;
         }

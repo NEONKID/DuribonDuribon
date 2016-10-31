@@ -4,5 +4,11 @@
     <string name="tab_timetable">Timetable</string>
     <string name="Options_settings">Settings</string>
     <string name="Timetable_add">Add</string>
+    <string name="Timetable_Mon">Mon</string>
+    <string name="Timetable_Tue">Tue</string>
+    <string name="Timetable_Wed">Wed</string>
+    <string name="Timetable_Thu">Thu</string>
+    <string name="Timetable_Fri">Fri</string>
+    <string name="Timetable_Sat">Sat</string>
     <string name="Search_Hint">Enter Location</string>
 </resources>

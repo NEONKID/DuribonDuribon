@@ -4,6 +4,12 @@
     <string name="tab_Map">외부 지도</string>
     <string name="tab_timetable">시간표</string>
     <string name="Options_settings">설정</string>
+    <string name="Timetable_Mon">월</string>
+    <string name="Timetable_Tue">화</string>
+    <string name="Timetable_Wed">수</string>
+    <string name="Timetable_Thu">목</string>
+    <string name="Timetable_Fri">금</string>
+    <string name="Timetable_Sat">토</string>
     <string name="Timetable_add">추가</string>
     <string name="Search_Hint">위치 입력</string>
 </resources>
