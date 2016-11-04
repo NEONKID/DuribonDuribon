@@ -2,6 +2,8 @@ package duribon.dlug.org.duribonduribon.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +36,7 @@ public class MapFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         try {
             view = inflater.inflate(R.layout.activity_map, container, false);
+
             /* Bundle data = getArguments();
             String schoolname = data.getString("Dankook University"); */
 
