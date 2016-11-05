@@ -19,11 +19,12 @@
 
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/location_me"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end|right"
         android:layout_margin="10dp"
         android:clickable="true"
-        android:src="@drawable/ic_eject_black_24dp" />
+        android:src="@drawable/ic_person_pin_white_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>

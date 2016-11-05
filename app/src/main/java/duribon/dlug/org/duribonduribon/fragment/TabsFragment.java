@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import duribon.dlug.org.duribonduribon.MainActivity;
 import duribon.dlug.org.duribonduribon.R;
 
 /**

@@ -1,6 +1,9 @@
 package duribon.dlug.org.duribonduribon;
 
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -19,15 +22,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
-
-        setSupportActionBar(toolbar);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.global, menu);
-        getMenuInflater().inflate(R.menu.search, menu);
-        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -36,5 +30,11 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.main_frame, TabsFragment.newInstance()).commit();
+        setSupportActionBar(toolbar);
+    }
+
+    public void setActionBarTitle(String title) {
+        toolbar.setTitle(title);
+        // setSupportActionBar(toolbar);
     }
 }
