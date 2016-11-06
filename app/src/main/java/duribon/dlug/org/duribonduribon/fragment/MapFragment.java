@@ -57,9 +57,6 @@ public class MapFragment extends Fragment implements View.OnClickListener {
             view = inflater.inflate(R.layout.fragment_map, container, false);
             ButterKnife.inject(this, view);
 
-            /* Bundle data = getArguments();
-            String schoolname = data.getString("Dankook University"); */
-
             mMap = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map)).getMap();
 
             mMap.addMarker(new MarkerOptions().position(DKU).title("단국대학교 대운동장"));
@@ -99,15 +96,6 @@ public class MapFragment extends Fragment implements View.OnClickListener {
         if(visible) {
 
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @OnClick(R.id.location_me)
