@@ -2,8 +2,6 @@ package duribon.dlug.org.duribonduribon.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
-import duribon.dlug.org.duribonduribon.MainActivity;
 import duribon.dlug.org.duribonduribon.R;
 
 /**
@@ -35,11 +32,6 @@ public class TimetableFragment extends Fragment {
 
         setHasOptionsMenu(true);
         return rootview;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
     }
 
     @Override

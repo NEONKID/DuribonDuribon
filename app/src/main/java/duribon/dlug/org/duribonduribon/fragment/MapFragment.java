@@ -68,24 +68,10 @@ public class MapFragment extends Fragment implements View.OnClickListener {
 
             setHasOptionsMenu(true);
 
-
         } catch (InflateException ex) {
 
         }
         return view;
-    }
-
-    @Override
-    public void setMenuVisibility(final boolean visible) {
-        super.setMenuVisibility(visible);
-        if(visible) {
-
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
     }
 
     @Override
@@ -105,6 +91,23 @@ public class MapFragment extends Fragment implements View.OnClickListener {
                 return false;
             }
         });
+    }
+
+    @Override
+    public void setMenuVisibility(final boolean visible) {
+        super.setMenuVisibility(visible);
+        if(visible) {
+
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @OnClick(R.id.location_me)
