@@ -16,6 +16,14 @@ import android.database.sqlite.SQLiteOpenHelper;
     SQLiteOpenHelper를 상속,,
     이 클래스는 추상 클래스로, DB 생성, 개방, 업그레이드를
     위한 베스트 프랙티스 패턴 구현을 위해 사용,,
+
+    RawQuery: SQL문을 그대로 받음,,
+    SQLite에서 지원하는 질의문에는 상당한 제약이 있음,,
+
+    복수개의 테이블에서 작업을 할 때는 RqwQuery,,
+    한 개의 테이블에서 작업할 때는 일반 Query를 사용,,
+
+    QueryBuilder의 사용,, : StringBuilder와 비슷,,
  */
 public class DBHandler extends SQLiteOpenHelper {
 

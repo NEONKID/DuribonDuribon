@@ -6,4 +6,8 @@
     <string name="Timetable_add">추가</string>
     <string name="Search_Hint">위치 입력</string>
     <string name="Interior_Map">내부 지도</string>
+    <string name="Second_Science">공학</string>
+    <string name="Graduate_School">대학원</string>
+    <string name="Dental_College">치과대학</string>
+    <string name="Dankook_University">단국대학교</string>
 </resources>
