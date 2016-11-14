@@ -1,24 +1,23 @@
 package duribon.dlug.org.duribonduribon.fragment;
 
 import android.Manifest;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.location.Address;
-import android.location.Geocoder;
-import android.os.Build;
+import android.graphics.drawable.BitmapDrawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
-import android.preference.DialogPreference;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.PermissionChecker;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,22 +25,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PolylineOptions;
+import com.skp.Tmap.TMapData;
+import com.skp.Tmap.TMapMarkerItem;
+import com.skp.Tmap.TMapPOIItem;
+import com.skp.Tmap.TMapPoint;
+import com.skp.Tmap.TMapPolyLine;
+import com.skp.Tmap.TMapView;
 
-import net.daum.mf.map.api.MapReverseGeoCoder;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import butterknife.ButterKnife;
@@ -55,18 +48,15 @@ import duribon.dlug.org.duribonduribon.R;
  */
 
 public class MapFragment extends Fragment implements View.OnClickListener {
-    private GoogleMap mMap;
+    private TMapView tMapView;
     private SearchView mSearchView;
     private MenuItem searchmenuItem;
     private Map<String, String> map = new HashMap<String, String>();
-    private String ChAddress;
+    private TMapPoint src, dst;
+    private LocationManager mLocationManager;
+    private String mProvider = LocationManager.NETWORK_PROVIDER;
 
     View view;
-
-    /*
-        단국대학교 대운동장
-     */
-    static final LatLng DKU = new LatLng(36.836609, 127.168095);
 
     @InjectView(R.id.coordinatorLayout)
     CoordinatorLayout coordinatorLayout;
@@ -76,15 +66,48 @@ public class MapFragment extends Fragment implements View.OnClickListener {
         return fragment;
     }
 
+    LocationListener mListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            moveMap(location.getLatitude(), location.getLongitude());
+            setMyLocation(location.getLatitude(), location.getLongitude());
+            src = new TMapPoint(location.getLatitude(), location.getLongitude());
+        }
+
+        @Override
+        public void onStatusChanged(String s, int i, Bundle bundle) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String s) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String s) {
+
+        }
+    };
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if(ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        Location location = mLocationManager.getLastKnownLocation(mProvider);
+        if(location != null) {
+            mListener.onLocationChanged(location);
+        }
+        mLocationManager.requestSingleUpdate(mProvider, mListener, null);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mLocationManager = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
 
-        /*
-            대체할 문자열을 영어와 한국어 등으로
-            그룹화 해야할 듯 함,,
-         */
-        map.put("산학협력관", getString(R.string.Dental_College));
         map.put("융합기술대학", getString(R.string.Second_Science));
         map.put("보건과학대학", getString(R.string.Graduate_School));
     }
@@ -95,14 +118,31 @@ public class MapFragment extends Fragment implements View.OnClickListener {
             view = inflater.inflate(R.layout.fragment_map, container, false);
             ButterKnife.inject(this, view);
 
-            mMap = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map)).getMap();
-            mMap.addMarker(new MarkerOptions().position(DKU).title("기본 위치")).showInfoWindow();
+            tMapView = (TMapView)view.findViewById(R.id.tMapView);
+            tMapView.setOnApiKeyListener(new TMapView.OnApiKeyListenerCallback() {
+                @Override
+                public void SKPMapApikeySucceed() {
+                    tMapView.setMapType(TMapView.MAPTYPE_STANDARD);
+                    tMapView.setTrafficInfo(true);
 
-            // Factory: 클래스를 만들어서 돌려줌,,
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(DKU, 10));
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
+                    tMapView.setSightVisible(true);
+                    tMapView.setTMapLogoPosition(TMapView.TMapLogoPositon.POSITION_BOTTOMLEFT);
+                    tMapView.setIconVisibility(true);
+                }
 
+                @Override
+                public void SKPMapApikeyFailed(String s) {
+                    // API를 불러오지 못했을 경우,,
+                }
+            });
+            tMapView.setSKPMapApiKey(getString(R.string.sk_maps_key));
+
+            // tMapView.setCenterPoint(127.168095, 36.836609);
+            // tMapView.setLocationPoint(127.168095, 36.836609);
+            tMapView.setZoomLevel(17);
+            // src = new TMapPoint(36.836609, 127.168095);
             setHasOptionsMenu(true);
+
         } catch (InflateException ex) {
 
         }
@@ -118,22 +158,9 @@ public class MapFragment extends Fragment implements View.OnClickListener {
         mSearchView = (SearchView) searchmenuItem.getActionView();
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
-            /*
-                결과를 도출하기 위해 GeoCoding을 사용,,
-             */
             @Override
             public boolean onQueryTextSubmit(String query) {
-                LatLng dst = findGoLocation(query);
-                try {
-                    mMap.addMarker(new MarkerOptions().position(dst).title(ChAddress)).showInfoWindow();
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(dst, 10));
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(17), 2000, null);
-                    mMap.addPolyline(new PolylineOptions().add(DKU, dst).width(5).color(Color.RED));
-                } catch(Exception ex) {
-                    Snackbar.make(coordinatorLayout, "검색어가 올바르지 않습니다.", Snackbar.LENGTH_LONG)
-                            .setAction("OK", null).show();
-                    ex.printStackTrace();
-                }
+                searchPOI(query);
                 return false;
             }
 
@@ -146,9 +173,23 @@ public class MapFragment extends Fragment implements View.OnClickListener {
         inflater.inflate(R.menu.location, menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.location_search:
+                if(src != null && dst != null) {
+                    searchRoute(src, dst);
+                } else {
+                    Snackbar.make(coordinatorLayout, "위치를 다시 선정하세요.", Snackbar.LENGTH_LONG).setAction("OK", null).show();
+                }
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     /*
-        지명 정보 오기 매핑,, (치과대학 제외)
-        아직 완벽하지 않습니다. 여러분들의 수정을 기다립니다.
+       지명 정보 오기 매핑,,
+       아직 완벽하지 않습니다. 여러분들의 수정을 기다립니다.
      */
     private String Searchcheck(String query) {
         String result = getString(R.string.Dankook_University);
@@ -158,36 +199,89 @@ public class MapFragment extends Fragment implements View.OnClickListener {
         }
 
         if(map.containsKey(query)) {
-            ChAddress = query;
             result += map.get(query);
             Snackbar.make(coordinatorLayout, "현재 바뀐 위치를 표시합니다.", Snackbar.LENGTH_LONG)
                     .setAction("OK", null).show();
         } else {
-            ChAddress = query;
             result += query;
         }
 
         return result;
     }
 
-    private LatLng findGoLocation(String address) {
-        Geocoder geocoder = new Geocoder(getActivity().getApplicationContext());
-        Address addr;
-        LatLng latLng = null;
-        address = Searchcheck(address);
-        try {
-            List<Address> listAddress = geocoder.getFromLocationName(address, 10);
-            if(listAddress.size() > 0) {
-                addr = listAddress.get(0);
-                double lat = addr.getLatitude();
-                double lng = addr.getLongitude();
-                latLng = new LatLng(lat, lng);
-                Log.i("[COMPUTE]", "Result: "+ lat + lng);
-            }
-        } catch(IOException ex) {
-            ex.printStackTrace();
+    private void moveMap(double lat, double lng) {
+        tMapView.setCenterPoint(lng, lat);
+    }
+
+    private void setMyLocation(double lat, double lng) {
+        tMapView.setLocationPoint(lng, lat);
+    }
+
+    private void searchPOI(String query) {
+        query = Searchcheck(query);
+        TMapData data = new TMapData();
+        if(!TextUtils.isEmpty(query)) {
+            data.findAllPOI(query, new TMapData.FindAllPOIListenerCallback() {
+                @Override
+                public void onFindAllPOI(final ArrayList<TMapPOIItem> arrayList) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            tMapView.removeAllMarkerItem();
+                            for (TMapPOIItem poi : arrayList) {
+                                addMarker(poi);
+                            }
+                            if (arrayList.size() > 0) {
+                                TMapPOIItem poi = arrayList.get(0);
+                                moveMap(poi.getPOIPoint().getLatitude(), poi.getPOIPoint().getLongitude());
+                                dst = new TMapPoint(poi.getPOIPoint().getLatitude(), poi.getPOIPoint().getLongitude());
+                                searchRoute(src, dst);
+                            }
+                        }
+                    });
+                }
+            });
         }
-        return latLng;
+    }
+
+    private void searchRoute(TMapPoint start, TMapPoint end) {
+        TMapData data = new TMapData();
+        if(start == null && end == null) {
+            return;
+        }
+        data.findPathDataWithType(TMapData.TMapPathType.CAR_PATH, start, end, new TMapData.FindPathDataListenerCallback() {
+            @Override
+            public void onFindPathData(final TMapPolyLine path) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        path.setLineWidth(5);
+                        path.setLineColor(Color.RED);
+                        tMapView.addTMapPath(path);
+                        Bitmap startImage = ((BitmapDrawable)ContextCompat.getDrawable(getActivity(), R.drawable.start_blue)).getBitmap();
+                        Bitmap endImage = ((BitmapDrawable)ContextCompat.getDrawable(getActivity(), R.drawable.end_green)).getBitmap();
+                        tMapView.setTMapPathIcon(startImage, endImage);
+                        Snackbar.make(coordinatorLayout, "거리: " + Math.round(path.getDistance()) + "m", Snackbar.LENGTH_LONG).setAction("OK", null).show();
+                        dst = null;
+                    }
+                });
+            }
+        });
+    }
+
+    private void addMarker(TMapPOIItem poi) {
+        TMapMarkerItem item = new TMapMarkerItem();
+        item.setTMapPoint(poi.getPOIPoint());
+
+        Bitmap icon = ((BitmapDrawable) ContextCompat.getDrawable(getActivity(), R.drawable.pushpin)).getBitmap();
+        item.setIcon(icon);
+        item.setPosition(0.5f, 1);
+        item.setCalloutTitle(poi.getPOIName());
+        item.setCalloutSubTitle(poi.getPOIContent());
+        item.setName(poi.getPOIName());
+        item.setCanShowCallout(true);
+
+        tMapView.addMarkerItem(poi.getPOIID(), item);
     }
 
     @OnClick(R.id.location_me)
@@ -206,4 +300,13 @@ public class MapFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {}
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if(ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        mLocationManager.removeUpdates(mListener);
+    }
 }

@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
+import com.facebook.stetho.Stetho;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import duribon.dlug.org.duribonduribon.fragment.TabsFragment;
@@ -16,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Stetho.initializeWithDefaults(this);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
     }
@@ -28,6 +31,4 @@ public class MainActivity extends AppCompatActivity {
         manager.beginTransaction().replace(R.id.main_frame, TabsFragment.newInstance()).commit();
         setSupportActionBar(toolbar);
     }
-
-
 }
