@@ -177,11 +177,7 @@ public class MapFragment extends Fragment implements View.OnClickListener {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.location_search:
-                if(src != null && dst != null) {
-                    searchRoute(src, dst);
-                } else {
-                    Snackbar.make(coordinatorLayout, "위치를 다시 선정하세요.", Snackbar.LENGTH_LONG).setAction("OK", null).show();
-                }
+                Snackbar.make(coordinatorLayout, "현재 준비 중입니다.", Snackbar.LENGTH_LONG).setAction("OK", null).show();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -200,8 +196,8 @@ public class MapFragment extends Fragment implements View.OnClickListener {
 
         if(map.containsKey(query)) {
             result += map.get(query);
-            Snackbar.make(coordinatorLayout, "현재 바뀐 위치를 표시합니다.", Snackbar.LENGTH_LONG)
-                    .setAction("OK", null).show();
+            /*Snackbar.make(coordinatorLayout, "현재 바뀐 위치를 표시합니다.", Snackbar.LENGTH_LONG)
+                    .setAction("OK", null).show(); */
         } else {
             result += query;
         }
