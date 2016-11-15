@@ -51,7 +51,7 @@ public class MapFragment extends Fragment implements View.OnClickListener {
     private TMapView tMapView;
     private SearchView mSearchView;
     private MenuItem searchmenuItem;
-    private Map<String, String> map = new HashMap<String, String>();
+    private Map<String, String> map = new HashMap<>();
     private TMapPoint src, dst;
     private LocationManager mLocationManager;
     private String mProvider = LocationManager.NETWORK_PROVIDER;
@@ -60,35 +60,6 @@ public class MapFragment extends Fragment implements View.OnClickListener {
 
     @InjectView(R.id.coordinatorLayout)
     CoordinatorLayout coordinatorLayout;
-
-    public static MapFragment newInstance() {
-        MapFragment fragment = new MapFragment();
-        return fragment;
-    }
-
-    LocationListener mListener = new LocationListener() {
-        @Override
-        public void onLocationChanged(Location location) {
-            moveMap(location.getLatitude(), location.getLongitude());
-            setMyLocation(location.getLatitude(), location.getLongitude());
-            src = new TMapPoint(location.getLatitude(), location.getLongitude());
-        }
-
-        @Override
-        public void onStatusChanged(String s, int i, Bundle bundle) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String s) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String s) {
-
-        }
-    };
 
     @Override
     public void onStart() {
@@ -101,6 +72,17 @@ public class MapFragment extends Fragment implements View.OnClickListener {
             mListener.onLocationChanged(location);
         }
         mLocationManager.requestSingleUpdate(mProvider, mListener, null);
+        map.put("융합기술대학", getString(R.string.Second_Science));
+        map.put("보건과학대학", getString(R.string.Graduate_School));
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if(ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        mLocationManager.removeUpdates(mListener);
     }
 
     @Override
@@ -108,8 +90,7 @@ public class MapFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         mLocationManager = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
 
-        map.put("융합기술대학", getString(R.string.Second_Science));
-        map.put("보건과학대학", getString(R.string.Graduate_School));
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -141,7 +122,6 @@ public class MapFragment extends Fragment implements View.OnClickListener {
             // tMapView.setLocationPoint(127.168095, 36.836609);
             tMapView.setZoomLevel(17);
             // src = new TMapPoint(36.836609, 127.168095);
-            setHasOptionsMenu(true);
 
         } catch (InflateException ex) {
 
@@ -151,8 +131,7 @@ public class MapFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-
+        menu.clear();
         inflater.inflate(R.menu.search, menu);
         searchmenuItem = menu.findItem(R.id.map_search);
         mSearchView = (SearchView) searchmenuItem.getActionView();
@@ -165,12 +144,11 @@ public class MapFragment extends Fragment implements View.OnClickListener {
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
+            public boolean onQueryTextChange(String query) { return false; }
 
         });
         inflater.inflate(R.menu.location, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -179,8 +157,9 @@ public class MapFragment extends Fragment implements View.OnClickListener {
             case R.id.location_search:
                 Snackbar.make(coordinatorLayout, "현재 준비 중입니다.", Snackbar.LENGTH_LONG).setAction("OK", null).show();
                 return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     /*
@@ -297,12 +276,21 @@ public class MapFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {}
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        if(ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
+    LocationListener mListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            moveMap(location.getLatitude(), location.getLongitude());
+            setMyLocation(location.getLatitude(), location.getLongitude());
+            src = new TMapPoint(location.getLatitude(), location.getLongitude());
         }
-        mLocationManager.removeUpdates(mListener);
-    }
+
+        @Override
+        public void onStatusChanged(String s, int i, Bundle bundle) {}
+
+        @Override
+        public void onProviderEnabled(String s) {}
+
+        @Override
+        public void onProviderDisabled(String s) {}
+    };
 }

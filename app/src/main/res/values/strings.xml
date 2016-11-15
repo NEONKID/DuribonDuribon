@@ -6,6 +6,7 @@
     <string name="Timetable_settings">Settings</string>
     <string name="Search_Hint">Enter Location</string>
     <string name="Interior_Map">InteriorMap</string>
+    <string name="Second_Science">2nd Science Hall</string>
 
     <!-- 임시로 만든 String 태그임.. 한글로 번역하거나 건들지 마세요 -->
     <string name="prodid_string">Timetable_ID</string>
@@ -15,5 +16,6 @@
     <string name="add_string">Add</string>
     <string name="find_string">Find</string>
     <string name="delete_string">Delete</string>
+    <string name="Graduate_School">Graduate School</string>
     <string name="Dankook_University">Dankook University</string>
 </resources>
