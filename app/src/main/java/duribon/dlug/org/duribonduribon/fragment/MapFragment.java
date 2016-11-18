@@ -72,8 +72,6 @@ public class MapFragment extends Fragment implements View.OnClickListener {
             mListener.onLocationChanged(location);
         }
         mLocationManager.requestSingleUpdate(mProvider, mListener, null);
-        map.put("융합기술대학", getString(R.string.Second_Science));
-        map.put("보건과학대학", getString(R.string.Graduate_School));
     }
 
     @Override
@@ -91,6 +89,9 @@ public class MapFragment extends Fragment implements View.OnClickListener {
         mLocationManager = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
 
         setHasOptionsMenu(true);
+
+        map.put("융합기술대학", getString(R.string.Second_Science));
+        map.put("보건과학대학", getString(R.string.Graduate_School));
     }
 
     @Override
