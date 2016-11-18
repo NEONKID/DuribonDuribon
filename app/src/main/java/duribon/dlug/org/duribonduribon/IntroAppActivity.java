@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -18,10 +17,17 @@ import android.widget.Toast;
  */
 
 public class IntroAppActivity extends AppCompatActivity {
+    private final int MY_PERMISSION_CODE_ACCESS_FINE_LOCATION = 100;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        checkPermission();
+
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            loadApp();
+        } else {
+            checkPermission();
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -30,7 +36,7 @@ public class IntroAppActivity extends AppCompatActivity {
             if(shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
                 Toast.makeText(this, "위치 권한이 필요합니다.", Toast.LENGTH_SHORT).show();
             }
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 100);
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSION_CODE_ACCESS_FINE_LOCATION);
         } else {
             Log.i("[INFO]", "User Permission Allow");
             loadApp();
@@ -41,7 +47,7 @@ public class IntroAppActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch(requestCode) {
-            case 100:
+            case MY_PERMISSION_CODE_ACCESS_FINE_LOCATION:
                 if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(this, "위치 권한이 허용되었습니다!", Toast.LENGTH_SHORT).show();
                     loadApp();
