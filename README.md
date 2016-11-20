@@ -16,6 +16,8 @@ ChangeLog:
 
 20161118 - DuribonDuribon 아이콘 추가, 기타 버그 수정
 
+20161120 - Tab Icon화를 위한 Toolbar Title 표시 변경, 외부 지도 내 위치 범위를 단국대학교 천안캠퍼스로 한정,,
+
         1118 버그 수정 사항
 
             --> 가로 모드 사용시, Fragment, Activity onCreate() 메소드가 다시 재호출되는 문제점:: Manifest.xml 파일 수정,,
