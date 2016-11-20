@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
+import duribon.dlug.org.duribonduribon.MainActivity;
 import duribon.dlug.org.duribonduribon.R;
 
 /**

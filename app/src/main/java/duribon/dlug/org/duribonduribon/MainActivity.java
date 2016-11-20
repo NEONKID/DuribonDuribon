@@ -31,4 +31,8 @@ public class MainActivity extends AppCompatActivity {
         manager.beginTransaction().replace(R.id.main_frame, TabsFragment.newInstance()).commit();
         setSupportActionBar(toolbar);
     }
+
+    public void setActionBarTitle(String title) {
+        toolbar.setTitle(title);
+    }
 }

@@ -41,6 +41,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import duribon.dlug.org.duribonduribon.InteriorMapActivity;
+import duribon.dlug.org.duribonduribon.MainActivity;
 import duribon.dlug.org.duribonduribon.R;
 
 /**
@@ -60,6 +61,10 @@ public class MapFragment extends Fragment implements View.OnClickListener {
 
     @InjectView(R.id.coordinatorLayout)
     CoordinatorLayout coordinatorLayout;
+
+    public MapFragment() {
+
+    }
 
     @Override
     public void onStart() {
@@ -118,11 +123,7 @@ public class MapFragment extends Fragment implements View.OnClickListener {
                 }
             });
             tMapView.setSKPMapApiKey(getString(R.string.sk_maps_key));
-
-            // tMapView.setCenterPoint(127.168095, 36.836609);
-            // tMapView.setLocationPoint(127.168095, 36.836609);
             tMapView.setZoomLevel(17);
-            // src = new TMapPoint(36.836609, 127.168095);
 
         } catch (InflateException ex) {
 
@@ -186,11 +187,22 @@ public class MapFragment extends Fragment implements View.OnClickListener {
     }
 
     private void moveMap(double lat, double lng) {
-        tMapView.setCenterPoint(lng, lat);
+        // 36.832311, 127.165038
+        if(lat < 36.832311  && lng < 127.165038) {
+            tMapView.setCenterPoint(127.168095, 36.836609);
+        } else {
+            tMapView.setCenterPoint(lng, lat);
+        }
     }
 
     private void setMyLocation(double lat, double lng) {
-        tMapView.setLocationPoint(lng, lat);
+        if(lat < 36.832311  && lng < 127.165038) {
+            tMapView.setCenterPoint(127.168095, 36.836609);
+            src = new TMapPoint(36.836609, 127.168095);
+        } else {
+            tMapView.setLocationPoint(lng, lat);
+            src = new TMapPoint(lat, lng);
+        }
     }
 
     private void searchPOI(String query) {
@@ -282,7 +294,6 @@ public class MapFragment extends Fragment implements View.OnClickListener {
         public void onLocationChanged(Location location) {
             moveMap(location.getLatitude(), location.getLongitude());
             setMyLocation(location.getLatitude(), location.getLongitude());
-            src = new TMapPoint(location.getLatitude(), location.getLongitude());
         }
 
         @Override
