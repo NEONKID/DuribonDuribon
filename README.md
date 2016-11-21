@@ -26,7 +26,7 @@ ChangeLog:
 
             --> 경로 탐색 없이 사용자 위치 지정 버튼 Action 방지
 
-            --> 죽전캠퍼스 외 다른 위치가 탐색될 경우, 경로 탐색 제한
+            --> 죽전캠퍼스를 포함하여  다른 위치가 탐색될 경우, 경로 탐색 제한
 
             --> Android Support Library v21 (Supoorted upper Android 5.0) 디자인에서 상단바 색깔 추가
 
