@@ -22,6 +22,7 @@
         android:layout_gravity="bottom|end|right"
         android:layout_margin="10dp"
         android:clickable="true"
+        android:visibility="invisible"
         android:src="@drawable/ic_person_pin_white_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>

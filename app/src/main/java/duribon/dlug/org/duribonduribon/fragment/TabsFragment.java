@@ -1,5 +1,6 @@
 package duribon.dlug.org.duribonduribon.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -25,16 +27,12 @@ public class TabsFragment extends Fragment {
     @InjectView(R.id.viewpager)
     ViewPager viewPager;
 
-    private final int TAB_COUNT = 2;
-
     public static TabsFragment newInstance() {
         TabsFragment fragment = new TabsFragment();
         return fragment;
     }
 
-    public TabsFragment() {
-
-    }
+    public TabsFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,18 +45,17 @@ public class TabsFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        TabPagerAdapter adapter = new TabPagerAdapter(getFragmentManager());
+        tabLayout.addTab(tabLayout.newTab().setIcon(android.R.drawable.ic_dialog_map));
+        tabLayout.addTab(tabLayout.newTab().setIcon(android.R.drawable.ic_dialog_info));
+
+        TabPagerAdapter adapter = new TabPagerAdapter(getFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
-        tabLayout.setTabsFromPagerAdapter(adapter);
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        // viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
-
-            @Override
-            public void onPageSelected(int position) {
-                switch(position) {
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+                switch(tab.getPosition()) {
                     case 0:
                         ((MainActivity)getActivity()).setActionBarTitle(getString(R.string.tab_Map));
                         break;
@@ -69,7 +66,10 @@ public class TabsFragment extends Fragment {
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) {}
+            public void onTabUnselected(TabLayout.Tab tab) {}
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {}
         });
     }
 
@@ -77,44 +77,5 @@ public class TabsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
-    }
-
-    private class TabPagerAdapter extends FragmentStatePagerAdapter {
-        public TabPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        // 탭 안에 들어가는 내용,,
-        @Override
-        public Fragment getItem(int position) {
-            switch(position) {
-                case 0:
-                    return new MapFragment();
-                case 1:
-                    return new TimetableFragment();
-            }
-            return null;
-        }
-
-        @Override
-        public int getItemPosition(Object object) {
-            return POSITION_NONE;
-        }
-
-        @Override
-        public int getCount() {
-            return TAB_COUNT;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch(position) {
-                case 0:
-                    return getString(R.string.tab_Map);
-                case 1:
-                    return getString(R.string.tab_timetable);
-            }
-            return "TAB " + position;
-        }
     }
 }

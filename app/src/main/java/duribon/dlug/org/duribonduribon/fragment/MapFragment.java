@@ -12,6 +12,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -41,7 +42,6 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import duribon.dlug.org.duribonduribon.InteriorMapActivity;
-import duribon.dlug.org.duribonduribon.MainActivity;
 import duribon.dlug.org.duribonduribon.R;
 
 /**
@@ -61,6 +61,9 @@ public class MapFragment extends Fragment implements View.OnClickListener {
 
     @InjectView(R.id.coordinatorLayout)
     CoordinatorLayout coordinatorLayout;
+
+    @InjectView(R.id.location_me)
+    FloatingActionButton location_me;
 
     public MapFragment() {
 
@@ -187,22 +190,12 @@ public class MapFragment extends Fragment implements View.OnClickListener {
     }
 
     private void moveMap(double lat, double lng) {
-        // 36.832311, 127.165038
-        if(lat < 36.832311  && lng < 127.165038) {
-            tMapView.setCenterPoint(127.168095, 36.836609);
-        } else {
-            tMapView.setCenterPoint(lng, lat);
-        }
+        tMapView.setCenterPoint(lng, lat);
     }
 
     private void setMyLocation(double lat, double lng) {
-        if(lat < 36.832311  && lng < 127.165038) {
-            tMapView.setCenterPoint(127.168095, 36.836609);
-            src = new TMapPoint(36.836609, 127.168095);
-        } else {
-            tMapView.setLocationPoint(lng, lat);
-            src = new TMapPoint(lat, lng);
-        }
+        tMapView.setLocationPoint(lng, lat);
+        src = new TMapPoint(lat, lng);
     }
 
     private void searchPOI(String query) {
@@ -222,6 +215,13 @@ public class MapFragment extends Fragment implements View.OnClickListener {
                             if (arrayList.size() > 0) {
                                 TMapPOIItem poi = arrayList.get(0);
                                 moveMap(poi.getPOIPoint().getLatitude(), poi.getPOIPoint().getLongitude());
+                                if(poi.getPOIPoint().getLatitude() > 36.832311 && poi.getPOIPoint().getLongitude() < 127.165038) {
+                                    Snackbar.make(coordinatorLayout, "해당 위치는 천안 캠퍼스가 아닙니다.", Snackbar.LENGTH_LONG).show();
+                                    if(location_me.getVisibility() != View.INVISIBLE) {
+                                        location_me.hide();
+                                    }
+                                    return;
+                                }
                                 dst = new TMapPoint(poi.getPOIPoint().getLatitude(), poi.getPOIPoint().getLongitude());
                                 searchRoute(src, dst);
                             }
@@ -249,8 +249,11 @@ public class MapFragment extends Fragment implements View.OnClickListener {
                         Bitmap startImage = ((BitmapDrawable)ContextCompat.getDrawable(getActivity(), R.drawable.start_blue)).getBitmap();
                         Bitmap endImage = ((BitmapDrawable)ContextCompat.getDrawable(getActivity(), R.drawable.end_green)).getBitmap();
                         tMapView.setTMapPathIcon(startImage, endImage);
-                        Snackbar.make(coordinatorLayout, "거리: " + Math.round(path.getDistance()) + "m", Snackbar.LENGTH_LONG).setAction("OK", null).show();
+                        Snackbar.make(coordinatorLayout, "거리: " + Math.round(path.getDistance()) + "m", Snackbar.LENGTH_LONG).show();
                         dst = null;
+                        if(location_me.getVisibility() == View.INVISIBLE) {
+                            location_me.show();
+                        }
                     }
                 });
             }
@@ -292,8 +295,13 @@ public class MapFragment extends Fragment implements View.OnClickListener {
     LocationListener mListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
-            moveMap(location.getLatitude(), location.getLongitude());
-            setMyLocation(location.getLatitude(), location.getLongitude());
+            if(location.getLatitude() < 36.832311  && location.getLongitude() < 127.165038) {
+                moveMap(36.836609, 127.168095);
+                setMyLocation(36.836609, 127.168095);
+            } else {
+                moveMap(location.getLatitude(), location.getLongitude());
+                setMyLocation(location.getLatitude(), location.getLongitude());
+            }
         }
 
         @Override

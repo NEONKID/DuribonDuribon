@@ -69,6 +69,6 @@ public class IntroAppActivity extends AppCompatActivity {
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
             }
-        }, 1000);
+        }, 150);
     }
 }
