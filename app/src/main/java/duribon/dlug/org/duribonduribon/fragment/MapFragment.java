@@ -65,9 +65,7 @@ public class MapFragment extends Fragment implements View.OnClickListener {
     @InjectView(R.id.location_me)
     FloatingActionButton location_me;
 
-    public MapFragment() {
-
-    }
+    public MapFragment() {}
 
     @Override
     public void onStart() {
