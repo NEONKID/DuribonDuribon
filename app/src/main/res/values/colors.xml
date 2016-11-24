@@ -3,4 +3,8 @@
     <color name="color_primary">#4caf50</color>
     <color name="color_primary_dark">#1b5e20</color>
     <color name="color_accent">#0d47a1</color>
+    <color name="color_spring">#4caf50</color>
+    <color name="color_summer">#4caf50</color>
+    <color name="color_fall">#1b5e20</color>
+    <color name="color_winter">#0d47a1</color>
 </resources>

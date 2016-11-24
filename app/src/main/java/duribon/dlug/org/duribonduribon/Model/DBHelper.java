@@ -26,7 +26,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "create table if not exists " + db_table_name + "(" + "_id integer PRIMARY KEY,"
-                + "subject text, " + "classroom text)";
+                + "subject text, " + "campus text, " + "classroom text)";
         db.execSQL(sql);
     }
 
@@ -37,20 +37,22 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void add(int id, String s_name, String c_name) {
+    public void add(int id, String s_name, String c_name, String cl_name) {
         ContentValues values = new ContentValues();
         values.put("_id", id);
         values.put("subject", s_name);
-        values.put("classroom", c_name);
+        values.put("campus", c_name);
+        values.put("classroom", cl_name);
         db.insert(db_table_name, null, values);
         search_data();
     }
 
-    public void update(long rawId, String s_name, String c_name) {
+    public void update(long rawId, String s_name, String c_name, String cl_name) {
         ContentValues values = new ContentValues();
         values.put("_id", rawId);
         values.put("subject", s_name);
-        values.put("classroom", c_name);
+        values.put("campus", c_name);
+        values.put("classroom", cl_name);
         db.update(db_table_name, values, "_id = " + rawId, null);
         search_data();
     }
@@ -67,8 +69,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
         while(!cursor.isAfterLast()) {
             String subject = cursor.getString(1);
-            String classroom = cursor.getString(2);
-            result = (subject + " " + classroom);
+            String campus = cursor.getString(2);
+            String classroom = cursor.getString(3);
+            result = (subject + " " + campus + " " + classroom);
             Log.i(tag, result);
             cursor.moveToNext();
         }
