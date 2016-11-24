@@ -3,7 +3,6 @@ package duribon.dlug.org.duribonduribon.fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -40,7 +39,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
             "6교시\n14:00","7교시\n15:00","8교시\n16:00","9교시\n17:00","10교시\n18:00"};
     String day_line[] = {"시간","월","화","수","목","금"};
 
-    LinearLayout layout[] = new LinearLayout[time_line.length];
+    LinearLayout[] layouts = new LinearLayout[time_line.length];
     LinearLayout lay_time;
 
     TextView time[] = new TextView[time_line.length];
@@ -52,6 +51,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
     EditText put_classroom;
 
     int db_id;
+    int Lid = R.id.lay_A;
     String db_classroom, db_subject;
 
     public static TimetableFragment newInstance() {
@@ -75,32 +75,27 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
 
         helper.search_data();
 
-        LinearLayout.LayoutParams params_1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+        LinearLayout.LayoutParams params_1 = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT);
-        params_1.weight = 1;
-        params_1.width = getLcdSizeWidth() / 6;
-        params_1.height = getLcdSizeHeight() / 14;
+        params_1.weight = 1;    // 레이아웃의 weight를 동적으로 설정 (칸의 비율)
+        params_1.width=getLcdSizeWidth() / 6;
+        params_1.height=getLcdSizeHeight() / 14;
         params_1.setMargins(1, 1, 1, 1);
-        params_1.gravity = 1;
+        params_1.gravity=1; // 표가 뒤틀리는 것을 방지
 
-        LinearLayout.LayoutParams params_2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT);
-        params_2.weight = 1;
-        params_2.width = getLcdSizeWidth() / 6;
-        params_2.height = getLcdSizeHeight() / 20;
+        LinearLayout.LayoutParams params_2 = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        params_2.weight = 1;    // 레이아웃의 weight를 동적으로 설정 (칸의 비율)
+        params_2.width=getLcdSizeWidth() / 6;
+        params_2.height=getLcdSizeHeight()/20;
         params_2.setMargins(1, 1, 1, 1);
 
         lay_time = (LinearLayout)ttview.findViewById(R.id.lay_time);
-        layout[0] = (LinearLayout)ttview.findViewById(R.id.lay_0);
-        layout[1] = (LinearLayout)ttview.findViewById(R.id.lay_1);
-        layout[2] = (LinearLayout)ttview.findViewById(R.id.lay_2);
-        layout[3] = (LinearLayout)ttview.findViewById(R.id.lay_3);
-        layout[4] = (LinearLayout)ttview.findViewById(R.id.lay_4);
-        layout[5] = (LinearLayout)ttview.findViewById(R.id.lay_5);
-        layout[6] = (LinearLayout)ttview.findViewById(R.id.lay_6);
-        layout[7] = (LinearLayout)ttview.findViewById(R.id.lay_7);
-        layout[8] = (LinearLayout)ttview.findViewById(R.id.lay_8);
-        layout[9] = (LinearLayout)ttview.findViewById(R.id.lay_9);
+        for(int i = 0; i < layouts.length; i++) {
+            layouts[i] = (LinearLayout)ttview.findViewById(Lid + i);
+        }
 
         //  요일
         for(int i = 0; i < day.length; i++) {
@@ -119,13 +114,13 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
             time[i].setGravity(Gravity.CENTER);
             time[i].setBackgroundColor(Color.parseColor("#EAEAEA"));
             time[i].setTextSize(10);
-            layout[i].addView(time[i], params_1);
+            layouts[i].addView(time[i], params_1);
         }
 
         cursor = helper.getAll();
         cursor.moveToFirst();
 
-        for(int i = 0, id = 0; i < layout.length; i++) {
+        for(int i = 0, id = 0; i < layouts.length; i++) {
             for(int j = 1; j < day_line.length; j++) {
                 data[id] = new TextView(getActivity());
                 data[id].setId(id);
@@ -144,7 +139,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
                 } else if(cursor.isAfterLast()) {
                     cursor.close();
                 }
-                layout[i].addView(data[id], params_1);
+                layouts[i].addView(data[id], params_1);
                 id++;
             }
         }
@@ -173,8 +168,8 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 int get_id = data[id].getId();
-                helper.add(get_id, put_subject.getText().toString(), TimetableFragment.this.put_classroom.getText().toString());
-                data[id].setText("" + put_subject.getText() + "\n" + put_classroom);
+                helper.add(get_id, put_subject.getText().toString(), put_classroom.getText().toString());
+                data[id].setText("" + put_subject.getText() + "\n" + put_classroom.getText());
             }
         });
         add_dialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {

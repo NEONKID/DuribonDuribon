@@ -22,8 +22,9 @@ public class InteriorMapActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_interiormap);
+        setContentView(R.layout.fragment_timetable);
         ButterKnife.inject(this);
+
 
         setSupportActionBar(toolBar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
