@@ -210,7 +210,7 @@ public class MapFragment extends Fragment implements View.OnClickListener {
                             for (TMapPOIItem poi : arrayList) {
                                 addMarker(poi);
                             }
-                            if (arrayList.size() > 0) {
+                            if(arrayList.size() > 0) {
                                 TMapPOIItem poi = arrayList.get(0);
                                 moveMap(poi.getPOIPoint().getLatitude(), poi.getPOIPoint().getLongitude());
                                 if(poi.getPOIPoint().getLatitude() > 36.832311 && poi.getPOIPoint().getLongitude() < 127.165038) {
@@ -249,7 +249,7 @@ public class MapFragment extends Fragment implements View.OnClickListener {
                         tMapView.setTMapPathIcon(startImage, endImage);
                         Snackbar.make(coordinatorLayout, "거리: " + Math.round(path.getDistance()) + "m", Snackbar.LENGTH_LONG).show();
                         dst = null;
-                        if(location_me.getVisibility() == View.INVISIBLE) {
+                        if(location_me.getVisibility() == View.INVISIBLE || location_me.getVisibility() == View.GONE) {
                             location_me.show();
                         }
                     }
