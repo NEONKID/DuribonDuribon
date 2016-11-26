@@ -52,12 +52,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle(title);
     }
 
-    /*
-        매 계절별로 Toolbar 색상 변경..
-        색깔 의견 받습니다..
-
-        --> 색깔 변경은 values/colors.xml 에서,,
-     */
     private int setSeasonColor(int month) {
         if(month > 2 && month < 6) { return R.color.color_spring; }
         else if(month > 5 && month < 9) { return R.color.color_summer; }
