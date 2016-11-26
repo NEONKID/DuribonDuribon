@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="college_list">
+        <item>인문과학대학</item>
+        <item>경상대학</item>
+        <item>법정대학</item>
+        <item>스포츠과학대학</item>
+        <item>예술대학</item>
+        <item>첨단과학대학</item>
+        <item>생명자원과학대학</item>
+        <item>융합기술대학</item>
+        <item>약학대학</item>
+        <item>보건과학대학</item>
+        <item>치과대학</item>
+        <item>산학협력관</item>
+        <item>의과대학</item>
+    </string-array>
+</resources>

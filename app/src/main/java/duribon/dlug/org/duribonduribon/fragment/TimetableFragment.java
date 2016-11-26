@@ -17,8 +17,12 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import butterknife.ButterKnife;
@@ -40,11 +44,10 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
             "19교시\n18:00", "20교시\n18:30", "21교시\n19:00", "22교시\n19:30", "23교시\n20:00"};
     private String day_line[] = {"시간","월","화","수","목","금"};
     private TextView data[] = new TextView[time_line.length * day_line.length];
-    private EditText put_subject;
-    private EditText put_classroom;
-    private EditText put_campus;
+    private EditText put_subject, put_classroom;
     private String db_classroom, db_subject, db_campus;
     private int db_id;
+    private CustomSearchPOI customSearchPOI;
 
     public static TimetableFragment newInstance() {
         TimetableFragment fragment = new TimetableFragment();
@@ -52,6 +55,20 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
     }
 
     public TimetableFragment() {}
+
+    public interface CustomSearchPOI {
+        void requestSearch(String query);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            customSearchPOI = (CustomSearchPOI)context;
+        } catch (ClassCastException ex) {
+            throw new ClassCastException(context.toString() + "must implement CustomSearchPOI");
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceBundle) {
@@ -151,21 +168,32 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
         return ttview;
     }
 
-    public void add_timetable_dialog(final int id) {
+
+
+    private void add_timetable_dialog(final int id) {
         final LinearLayout dig_layout = (LinearLayout)View.inflate(getActivity(), R.layout.activity_timetable_add, null);
-        final AlertDialog.Builder add_dialog = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder add_dialog = new AlertDialog.Builder(getActivity());
+        final Spinner spinner = (Spinner)dig_layout.findViewById(R.id.input_college);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                adapterView.getItemAtPosition(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
         add_dialog.setTitle("Timetable");
         // add_dialog.setIcon()
         add_dialog.setView(dig_layout);
         add_dialog.setPositiveButton("저장", new DialogInterface.OnClickListener() {
             EditText put_subject = (EditText)dig_layout.findViewById(R.id.input_subject);
-            EditText put_campus = (EditText)dig_layout.findViewById(R.id.input_campus);
             EditText put_classroom = (EditText)dig_layout.findViewById(R.id.input_classroom);
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 int get_id = data[id].getId();
-                helper.add(get_id, put_subject.getText().toString(), put_campus.getText().toString(), put_classroom.getText().toString());
-                data[id].setText("" + put_subject.getText() + "\n" + put_campus.getText() + "\n" + put_classroom.getText());
+                helper.add(get_id, put_subject.getText().toString(), spinner.getSelectedItem().toString(), put_classroom.getText().toString());
+                data[id].setText("" + put_subject.getText() + "\n" + spinner.getSelectedItem().toString() + "\n" + put_classroom.getText());
             }
         });
         add_dialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -177,14 +205,61 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
         add_dialog.show();
     }
 
-    public void update_timetable_dialog(final int id) {
+    private void info_timetable_dialog(final int id) {
+        final LinearLayout dig_layout = (LinearLayout)View.inflate(getActivity(), R.layout.activity_timetable_info, null);
+        final TextView out_subject = (TextView)dig_layout.findViewById(R.id.info_subject);
+        final TextView out_college = (TextView)dig_layout.findViewById(R.id.info_campus);
+        final TextView out_classroom = (TextView)dig_layout.findViewById(R.id.info_classroom);
+
+        AlertDialog.Builder choice_dialog = new AlertDialog.Builder(getActivity());
+        choice_dialog.setTitle("시간표 정보");
+        choice_dialog.setView(dig_layout);
+        final Cursor info_cursor = helper.getAll();
+
+        if(info_cursor != null) {
+            info_cursor.moveToFirst();
+            while(!info_cursor.isAfterLast()) {
+                if(info_cursor.getInt(0) == id) {
+                    out_subject.setText(info_cursor.getString(1));
+                    out_college.setText(info_cursor.getString(2));
+                    out_classroom.setText(info_cursor.getString(3));
+                    break;
+                }
+                info_cursor.moveToNext();
+            }
+        }
+        choice_dialog.setPositiveButton("경로 탐색", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                customSearchPOI.requestSearch(out_college.getText().toString());
+            }
+        });
+        choice_dialog.setNegativeButton("시간표 수정", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                update_timetable_dialog(id);
+            }
+        });
+        choice_dialog.show();
+    }
+
+    private void update_timetable_dialog(final int id) {
         final LinearLayout dig_layout = (LinearLayout)View.inflate(getActivity(), R.layout.activity_timetable_add, null);
+        final Spinner spinner = (Spinner)dig_layout.findViewById(R.id.input_college);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                adapterView.getItemAtPosition(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
         AlertDialog.Builder update_dialog = new AlertDialog.Builder(getActivity());
         update_dialog.setTitle("Timetable");
         // update_dialog.setIcon();
         update_dialog.setView(dig_layout);
         put_subject = (EditText)dig_layout.findViewById(R.id.input_subject);
-        put_campus = (EditText)dig_layout.findViewById(R.id.input_campus);
         put_classroom = (EditText)dig_layout.findViewById(R.id.input_classroom);
 
         Cursor update_cursor = helper.getAll();
@@ -193,7 +268,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
             while(!update_cursor.isAfterLast()) {
                 if(update_cursor.getInt(0) == id) {
                     put_subject.setText(update_cursor.getString(1));
-                    put_campus.setText(update_cursor.getString(2));
+                    // put_college.setText(update_cursor.getString(2));
                     put_classroom.setText(update_cursor.getString(3));
                     break;
                 }
@@ -212,16 +287,12 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
                 put_classroom.setText(null);
             }
         });
-        put_campus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) { put_campus.setText(null); }
-        });
         update_dialog.setPositiveButton("수정", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 int get_id = data[id].getId();
-                helper.update(get_id, put_subject.getText().toString(), put_campus.getText().toString(), put_classroom.getText().toString());
-                data[id].setText("" + put_subject.getText() + "\n" + put_campus.getText() + "\n" + put_classroom.getText());
+                helper.update(get_id, put_subject.getText().toString(), spinner.getSelectedItem().toString(), put_classroom.getText().toString());
+                data[id].setText("" + put_subject.getText() + "\n" + spinner.getSelectedItem().toString() + "\n" + put_classroom.getText());
             }
         });
         update_dialog.setNegativeButton("삭제", new DialogInterface.OnClickListener() {
@@ -241,7 +312,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(final View view) {
         Cursor event_cursor = null;
         event_cursor = helper.getAll();
         int get[] = new int[time_line.length * day_line.length];
@@ -259,7 +330,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
             for(int i = 0; i < time_line.length * day_line.length; i++) {
                 Log.i(tag, "get[i] = " + get[i] + "view.getId = " + view.getId() + "data[i].getId() =" + data[i].getId());
                 if((get[i] != 0) && (get[i] == view.getId())) {
-                    update_timetable_dialog(view.getId());
+                    info_timetable_dialog(view.getId());
                     break;
                 } else if((get[i] == 0) && (view.getId() == data[i].getId())) {
                     add_timetable_dialog(view.getId());

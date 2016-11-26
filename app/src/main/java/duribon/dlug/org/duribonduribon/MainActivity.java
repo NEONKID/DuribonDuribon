@@ -2,7 +2,6 @@ package duribon.dlug.org.duribonduribon;
 
 import android.os.Build;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,9 +13,11 @@ import java.util.Calendar;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import duribon.dlug.org.duribonduribon.fragment.MapFragment;
 import duribon.dlug.org.duribonduribon.fragment.TabsFragment;
+import duribon.dlug.org.duribonduribon.fragment.TimetableFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements TimetableFragment.CustomSearchPOI {
     @InjectView(R.id.main_tool_bar)
     Toolbar toolbar;
 
@@ -57,5 +58,12 @@ public class MainActivity extends AppCompatActivity {
         else if(month > 5 && month < 9) { return R.color.color_summer; }
         else if(month > 8 && month < 11) { return R.color.color_fall; }
         else { return R.color.color_winter; }
+    }
+
+    @Override
+    public void requestSearch(String query) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        MapFragment mapFragment = (MapFragment)fragmentManager.findFragmentById(R.id.main_frame);
+        mapFragment.searchPOI(query);
     }
 }

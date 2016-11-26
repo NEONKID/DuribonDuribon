@@ -19,6 +19,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -50,12 +51,9 @@ import duribon.dlug.org.duribonduribon.R;
 
 public class MapFragment extends Fragment implements View.OnClickListener {
     private TMapView tMapView;
-    private SearchView mSearchView;
-    private MenuItem searchmenuItem;
     private Map<String, String> map = new HashMap<>();
     private TMapPoint src, dst;
     private LocationManager mLocationManager;
-    private String mProvider = LocationManager.NETWORK_PROVIDER;
 
     View view;
 
@@ -65,19 +63,34 @@ public class MapFragment extends Fragment implements View.OnClickListener {
     @InjectView(R.id.location_me)
     FloatingActionButton location_me;
 
+    private LocationListener mListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            if(location.getLatitude() < 36.832311  && location.getLongitude() < 127.165038) {
+                moveMap(36.836609, 127.168095);
+                setMyLocation(36.836609, 127.168095);
+            } else {
+                moveMap(location.getLatitude(), location.getLongitude());
+                setMyLocation(location.getLatitude(), location.getLongitude());
+            }
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle bundle) { Log.d("[Location Service]", "onStatusChanged, provider:" + provider + ", status:" + status + ", Bundle:" + bundle); }
+
+        @Override
+        public void onProviderEnabled(String provider) { Log.d("[Location Service]", "onProviderEnabled, provider:" + provider); }
+
+        @Override
+        public void onProviderDisabled(String provider) { Log.d("[Location Service]", "onProviderDisabled, provider:" + provider); }
+    };
+
     public MapFragment() {}
 
     @Override
     public void onStart() {
         super.onStart();
-        if(ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        Location location = mLocationManager.getLastKnownLocation(mProvider);
-        if(location != null) {
-            mListener.onLocationChanged(location);
-        }
-        mLocationManager.requestSingleUpdate(mProvider, mListener, null);
+        onLocationManager();
     }
 
     @Override
@@ -92,12 +105,10 @@ public class MapFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mLocationManager = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
-
         setHasOptionsMenu(true);
-
-        map.put("융합기술대학", getString(R.string.Second_Science));
-        map.put("보건과학대학", getString(R.string.Graduate_School));
+        setMapData();
     }
 
     @Override
@@ -116,6 +127,9 @@ public class MapFragment extends Fragment implements View.OnClickListener {
                     tMapView.setSightVisible(true);
                     tMapView.setTMapLogoPosition(TMapView.TMapLogoPositon.POSITION_BOTTOMLEFT);
                     tMapView.setIconVisibility(true);
+
+                    moveMap(36.836609, 127.168095);
+                    setMyLocation(36.836609, 127.168095);
                 }
 
                 @Override
@@ -134,6 +148,8 @@ public class MapFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        final SearchView mSearchView;
+        final MenuItem searchmenuItem;
         menu.clear();
         inflater.inflate(R.menu.search, menu);
         searchmenuItem = menu.findItem(R.id.map_search);
@@ -158,28 +174,22 @@ public class MapFragment extends Fragment implements View.OnClickListener {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.location_search:
-                Snackbar.make(coordinatorLayout, "현재 준비 중입니다.", Snackbar.LENGTH_LONG).setAction("OK", null).show();
+                onLocationManager();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    /*
-       지명 정보 오기 매핑,,
-       아직 완벽하지 않습니다. 여러분들의 수정을 기다립니다.
-     */
     private String Searchcheck(String query) {
         String result = getString(R.string.Dankook_University);
 
-        if(query.charAt(0) == getString(R.string.Dankook_University).charAt(0)) {
+        if(query.startsWith(getString(R.string.Dankook_University).substring(0,1))) {
             result = "";
         }
 
         if(map.containsKey(query)) {
             result += map.get(query);
-            /*Snackbar.make(coordinatorLayout, "현재 바뀐 위치를 표시합니다.", Snackbar.LENGTH_LONG)
-                    .setAction("OK", null).show(); */
         } else {
             result += query;
         }
@@ -196,7 +206,7 @@ public class MapFragment extends Fragment implements View.OnClickListener {
         src = new TMapPoint(lat, lng);
     }
 
-    private void searchPOI(String query) {
+    public void searchPOI(String query) {
         query = Searchcheck(query);
         TMapData data = new TMapData();
         if(!TextUtils.isEmpty(query)) {
@@ -287,28 +297,50 @@ public class MapFragment extends Fragment implements View.OnClickListener {
                 .show();
     }
 
+    /*
+       지명 정보 중복 매핑,,
+       사용자가 검색할만한 단어를 중심으로 데이터화,,
+     */
+    private void setMapData() {
+        map.put("융합기술대학", getString(R.string.Second_Science));
+        map.put("공학관", getString(R.string.Second_Science));
+        map.put("보건대학", getString(R.string.Graduate_School));
+        map.put("보건간호관", getString(R.string.Graduate_School));
+        map.put("간호대학", getString(R.string.Graduate_School));
+        map.put("생자대", getString(R.string.Life_Resource));
+        map.put("외국어대학", getString(R.string.Humanities_college));
+        map.put("외대", getString(R.string.Humanities_college));
+        map.put("인문대", getString(R.string.Humanities_college));
+        map.put("법대", getString(R.string.law_college));
+        map.put("사회과학관", getString(R.string.law_college));
+        map.put("도서관", getString(R.string.Library));
+        map.put("약대", getString(R.string.Medical_college));
+        map.put("약학대학", getString(R.string.Medical_college));
+        map.put("학생회관", getString(R.string.Post_Office));
+        map.put("우체국", getString(R.string.Post_Office));
+        map.put("스포츠과학대학", getString(R.string.sports_college));
+    }
+
     @Override
     public void onClick(View v) {}
 
-    LocationListener mListener = new LocationListener() {
-        @Override
-        public void onLocationChanged(Location location) {
-            if(location.getLatitude() < 36.832311  && location.getLongitude() < 127.165038) {
-                moveMap(36.836609, 127.168095);
-                setMyLocation(36.836609, 127.168095);
-            } else {
-                moveMap(location.getLatitude(), location.getLongitude());
-                setMyLocation(location.getLatitude(), location.getLongitude());
-            }
+    private void onLocationManager() {
+        final String mProvider = LocationManager.NETWORK_PROVIDER;
+        final String gProvider = LocationManager.GPS_PROVIDER;
+        if(ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
         }
-
-        @Override
-        public void onStatusChanged(String s, int i, Bundle bundle) {}
-
-        @Override
-        public void onProviderEnabled(String s) {}
-
-        @Override
-        public void onProviderDisabled(String s) {}
-    };
+        Location mLocation = mLocationManager.getLastKnownLocation(mProvider);
+        Location gLocation = mLocationManager.getLastKnownLocation(gProvider);
+        if(mLocation != null) {
+            mListener.onLocationChanged(mLocation);
+            mLocationManager.requestLocationUpdates(gProvider, 100, 1, mListener);
+            if(gLocation != null) {
+                mListener.onLocationChanged(gLocation);
+                mLocationManager.requestLocationUpdates(mProvider, 100, 1, mListener);
+            }
+        } else {
+            Snackbar.make(coordinatorLayout, "현재 위치를 확인할 수 없습니다.", Snackbar.LENGTH_LONG).show();
+        }
+    }
 }
