@@ -183,7 +183,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {}
         });
-        add_dialog.setTitle("Timetable");
+        add_dialog.setTitle("시간표 추가");
         // add_dialog.setIcon()
         add_dialog.setView(dig_layout);
         add_dialog.setPositiveButton("저장", new DialogInterface.OnClickListener() {
@@ -256,7 +256,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
             public void onNothingSelected(AdapterView<?> adapterView) {}
         });
         AlertDialog.Builder update_dialog = new AlertDialog.Builder(getActivity());
-        update_dialog.setTitle("Timetable");
+        update_dialog.setTitle("시간표 추가/삭제");
         // update_dialog.setIcon();
         update_dialog.setView(dig_layout);
         put_subject = (EditText)dig_layout.findViewById(R.id.input_subject);
