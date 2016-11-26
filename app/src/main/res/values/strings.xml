@@ -6,16 +6,71 @@
     <string name="Timetable_settings">Settings</string>
     <string name="Search_Hint">Enter Location</string>
     <string name="Interior_Map">InteriorMap</string>
-    <string name="Second_Science">2nd Science Hall</string>
-
-    <!-- 임시로 만든 String 태그임.. 한글로 번역하거나 건들지 마세요 -->
-    <string name="prodid_string">Timetable_ID</string>
-    <string name="not_assigned_string">Not assigned</string>
-    <string name="prodname_string">Subject Name</string>
-    <string name="quantity_text">Timetable</string>
+    <string name="prodid_string" translatable="false">Timetable_ID</string>
+    <string name="not_assigned_string" translatable="false">Not assigned</string>
+    <string name="prodname_string" translatable="false">Subject Name</string>
+    <string name="quantity_text" translatable="false">Timetable</string>
     <string name="add_string">Add</string>
     <string name="find_string">Find</string>
     <string name="delete_string">Delete</string>
-    <string name="Graduate_School">Graduate School</string>
-    <string name="Dankook_University">Dankook University</string>
+    <string name="Press_OK">OK</string>
+    <string name="Press_save">SAVE</string>
+    <string name="Press_cancel">CANCEL</string>
+    <string name="Press_modify">MODIFY</string>
+    <string name="Press_delete">DELETE</string>
+    <string name="distance">Distance</string>
+    <string name="No_place">The location is not Cheonan Campus for DKU</string>
+    <string name="location_question">Did you arrive at your destination exactly?</string>
+    <string name="location_fail">We can not verify your location.</string>
+    <string name="table_time">Class</string>
+    <string name="Second_Science">공학대학</string>
+    <string name="Life_Resource">생명자원과학대학</string>
+    <string name="Medical_college">약학관</string>
+    <string name="Humanities_college">인문과학대학</string>
+    <string name="Graduate_School">천안 대학원</string>
+    <string name="Library">율곡기념관</string>
+    <string name="law_college">법정대학</string>
+    <string name="sports_college">체육대학</string>
+    <string name="Dankook_University">단국대학교</string>
+    <string name="Post_Office">천안 우체국</string>
+    <string-array name="table_times">
+        <item name="table_1">01class&#10;09:00</item>
+        <item name="table_2">02class&#10;09:30</item>
+        <item name="table_3">03class&#10;10:00</item>
+        <item name="table_4">04class&#10;10:30</item>
+        <item name="table_5">05class&#10;11:00</item>
+        <item name="table_6">06class&#10;11:30</item>
+        <item name="table_7">07class&#10;12:00</item>
+        <item name="table_8">08class&#10;12:30</item>
+        <item name="table_9">09class&#10;01:00</item>
+        <item name="table_10">10class&#10;01:30</item>
+        <item name="table_11">11class&#10;02:00</item>
+        <item name="table_12">12class&#10;02:30</item>
+        <item name="table_13">13class&#10;03:00</item>
+        <item name="table_14">14class&#10;03:30</item>
+        <item name="table_15">15class&#10;04:00</item>
+        <item name="table_16">16class&#10;04:30</item>
+        <item name="table_17">17class&#10;05:00</item>
+        <item name="table_18">18class&#10;05:30</item>
+        <item name="table_19">19class&#10;06:00</item>
+        <item name="table_20">20class&#10;06:30</item>
+        <item name="table_21">21class&#10;07:00</item>
+        <item name="table_22">22class&#10;07:30</item>
+        <item name="table_23">23class&#10;08:00</item>
+    </string-array>
+    <string-array name="table_days">
+        <item name="table_day">Time</item>
+        <item name="day_Mon">Mon</item>
+        <item name="day_Tue">Tue</item>
+        <item name="day_Wed">Wed</item>
+        <item name="day_Thu">Thu</item>
+        <item name="day_Fri">Fri</item>
+    </string-array>
+    <string name="tt_add">Add Timetable colmun</string>
+    <string name="tt_info">Information Timetable</string>
+    <string name="Location_navigate">Navigation</string>
+    <string name="tt_modify">Modify Timetable</string>
+    <string name="tt_modelete">Mod/Del Timetable</string>
+    <string name="know_permission">Require Location Permissions</string>
+    <string name="allow_permission">Location permissions are allowed!</string>
 </resources>

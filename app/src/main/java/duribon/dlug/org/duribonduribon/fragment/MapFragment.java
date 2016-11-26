@@ -224,7 +224,7 @@ public class MapFragment extends Fragment implements View.OnClickListener {
                                 TMapPOIItem poi = arrayList.get(0);
                                 moveMap(poi.getPOIPoint().getLatitude(), poi.getPOIPoint().getLongitude());
                                 if(poi.getPOIPoint().getLatitude() > 36.832311 && poi.getPOIPoint().getLongitude() < 127.165038) {
-                                    Snackbar.make(coordinatorLayout, "해당 위치는 천안 캠퍼스가 아닙니다.", Snackbar.LENGTH_LONG).show();
+                                    Snackbar.make(coordinatorLayout, getString(R.string.No_place), Snackbar.LENGTH_LONG).show();
                                     if(location_me.getVisibility() != View.INVISIBLE) {
                                         location_me.hide();
                                     }
@@ -257,7 +257,7 @@ public class MapFragment extends Fragment implements View.OnClickListener {
                         Bitmap startImage = ((BitmapDrawable)ContextCompat.getDrawable(getActivity(), R.drawable.start_blue)).getBitmap();
                         Bitmap endImage = ((BitmapDrawable)ContextCompat.getDrawable(getActivity(), R.drawable.end_green)).getBitmap();
                         tMapView.setTMapPathIcon(startImage, endImage);
-                        Snackbar.make(coordinatorLayout, "거리: " + Math.round(path.getDistance()) + "m", Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(coordinatorLayout, getString(R.string.distance)+": " + Math.round(path.getDistance()) + "m", Snackbar.LENGTH_LONG).show();
                         dst = null;
                         if(location_me.getVisibility() == View.INVISIBLE || location_me.getVisibility() == View.GONE) {
                             location_me.show();
@@ -285,7 +285,7 @@ public class MapFragment extends Fragment implements View.OnClickListener {
 
     @OnClick(R.id.location_me)
     public void locationPin() {
-        Snackbar.make(coordinatorLayout, "목적지에 정확히 도착했습니까? ", Snackbar.LENGTH_LONG)
+        Snackbar.make(coordinatorLayout, getString(R.string.location_question), Snackbar.LENGTH_LONG)
                 .setAction("OK", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -340,7 +340,7 @@ public class MapFragment extends Fragment implements View.OnClickListener {
                 mLocationManager.requestLocationUpdates(mProvider, 100, 1, mListener);
             }
         } else {
-            Snackbar.make(coordinatorLayout, "현재 위치를 확인할 수 없습니다.", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(coordinatorLayout, getString(R.string.location_fail), Snackbar.LENGTH_LONG).show();
         }
     }
 }

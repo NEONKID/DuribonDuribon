@@ -33,7 +33,7 @@ public class IntroAppActivity extends AppCompatActivity {
     private void checkPermission() {
         if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if(shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
-                Toast.makeText(this, "위치 권한이 필요합니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.know_permission), Toast.LENGTH_SHORT).show();
             }
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSION_CODE_ACCESS_FINE_LOCATION);
         } else {
@@ -48,7 +48,7 @@ public class IntroAppActivity extends AppCompatActivity {
         switch(requestCode) {
             case MY_PERMISSION_CODE_ACCESS_FINE_LOCATION:
                 if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, "위치 권한이 허용되었습니다!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.allow_permission), Toast.LENGTH_SHORT).show();
                     loadApp();
                     break;
                 } else {

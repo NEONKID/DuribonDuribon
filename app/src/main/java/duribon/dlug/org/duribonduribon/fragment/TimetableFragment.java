@@ -38,11 +38,8 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
     private String db_name = "duribon_timetable.db";
     private DBHelper helper;
     private Cursor cursor;
-    private String time_line[] = {"1교시\n09:00","2교시\n09:30","3교시\n10:00","4교시\n10:30","5교시\n11:00",
-            "6교시\n11:30","7교시\n12:00","8교시\n12:30","9교시\n13:00","10교시\n14:00", "11교시\n14:30",
-            "12교시\n15:00", "13교시\n15:30", "14교시\n16:00", "15교시\n16:30", "17교시\n17:00", "18교시\n17:30",
-            "19교시\n18:00", "20교시\n18:30", "21교시\n19:00", "22교시\n19:30", "23교시\n20:00"};
-    private String day_line[] = {"시간","월","화","수","목","금"};
+    private String time_line[] = new String[23];
+    private String day_line[] = new String[6];
     private TextView data[] = new TextView[time_line.length * day_line.length];
     private EditText put_subject, put_classroom;
     private String db_classroom, db_subject, db_campus;
@@ -93,6 +90,8 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
         Log.i(tag, "counter = " + counter);
 
         helper.search_data();
+        time_line= getResources().getStringArray(R.array.table_times);
+        day_line = getResources().getStringArray(R.array.table_days);
 
         LinearLayout.LayoutParams params_1 = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -168,8 +167,6 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
         return ttview;
     }
 
-
-
     private void add_timetable_dialog(final int id) {
         final LinearLayout dig_layout = (LinearLayout)View.inflate(getActivity(), R.layout.activity_timetable_add, null);
         AlertDialog.Builder add_dialog = new AlertDialog.Builder(getActivity());
@@ -183,10 +180,10 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {}
         });
-        add_dialog.setTitle("시간표 추가");
+        add_dialog.setTitle(getString(R.string.tt_add));
         // add_dialog.setIcon()
         add_dialog.setView(dig_layout);
-        add_dialog.setPositiveButton("저장", new DialogInterface.OnClickListener() {
+        add_dialog.setPositiveButton(getString(R.string.Press_save), new DialogInterface.OnClickListener() {
             EditText put_subject = (EditText)dig_layout.findViewById(R.id.input_subject);
             EditText put_classroom = (EditText)dig_layout.findViewById(R.id.input_classroom);
             @Override
@@ -196,7 +193,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
                 data[id].setText("" + put_subject.getText() + "\n" + spinner.getSelectedItem().toString() + "\n" + put_classroom.getText());
             }
         });
-        add_dialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+        add_dialog.setNegativeButton(getString(R.string.Press_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.cancel();
@@ -212,7 +209,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
         final TextView out_classroom = (TextView)dig_layout.findViewById(R.id.info_classroom);
 
         AlertDialog.Builder choice_dialog = new AlertDialog.Builder(getActivity());
-        choice_dialog.setTitle("시간표 정보");
+        choice_dialog.setTitle(getString(R.string.tt_info));
         choice_dialog.setView(dig_layout);
         final Cursor info_cursor = helper.getAll();
 
@@ -228,13 +225,13 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
                 info_cursor.moveToNext();
             }
         }
-        choice_dialog.setPositiveButton("경로 탐색", new DialogInterface.OnClickListener() {
+        choice_dialog.setPositiveButton(getString(R.string.Location_navigate), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 customSearchPOI.requestSearch(out_college.getText().toString());
             }
         });
-        choice_dialog.setNegativeButton("시간표 수정", new DialogInterface.OnClickListener() {
+        choice_dialog.setNegativeButton(getString(R.string.tt_modify), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 update_timetable_dialog(id);
@@ -256,7 +253,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
             public void onNothingSelected(AdapterView<?> adapterView) {}
         });
         AlertDialog.Builder update_dialog = new AlertDialog.Builder(getActivity());
-        update_dialog.setTitle("시간표 추가/삭제");
+        update_dialog.setTitle(getString(R.string.tt_modelete));
         // update_dialog.setIcon();
         update_dialog.setView(dig_layout);
         put_subject = (EditText)dig_layout.findViewById(R.id.input_subject);
@@ -287,7 +284,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
                 put_classroom.setText(null);
             }
         });
-        update_dialog.setPositiveButton("수정", new DialogInterface.OnClickListener() {
+        update_dialog.setPositiveButton(getString(R.string.Press_modify), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 int get_id = data[id].getId();
@@ -295,7 +292,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
                 data[id].setText("" + put_subject.getText() + "\n" + spinner.getSelectedItem().toString() + "\n" + put_classroom.getText());
             }
         });
-        update_dialog.setNegativeButton("삭제", new DialogInterface.OnClickListener() {
+        update_dialog.setNegativeButton(getString(R.string.Press_delete), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 helper.delete(id);

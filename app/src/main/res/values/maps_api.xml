@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="sk_maps_key">ee740783-e140-3fd5-8264-6cc1f81ac2fb</string>
+    <string name="sk_maps_key" translatable="false">ee740783-e140-3fd5-8264-6cc1f81ac2fb</string>
 </resources>
