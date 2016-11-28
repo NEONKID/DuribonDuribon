@@ -1,10 +1,14 @@
 package duribon.dlug.org.duribonduribon;
 
 import android.os.Build;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Window;
 
 import com.facebook.stetho.Stetho;
@@ -13,6 +17,7 @@ import java.util.Calendar;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import duribon.dlug.org.duribonduribon.fragment.CurrentFragment;
 import duribon.dlug.org.duribonduribon.fragment.MapFragment;
 import duribon.dlug.org.duribonduribon.fragment.TabsFragment;
 import duribon.dlug.org.duribonduribon.fragment.TimetableFragment;
@@ -20,6 +25,7 @@ import duribon.dlug.org.duribonduribon.fragment.TimetableFragment;
 public class MainActivity extends AppCompatActivity implements TimetableFragment.CustomSearchPOI {
     @InjectView(R.id.main_tool_bar)
     Toolbar toolbar;
+    private MapFragment mapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +68,17 @@ public class MainActivity extends AppCompatActivity implements TimetableFragment
 
     @Override
     public void requestSearch(String query) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        MapFragment mapFragment = (MapFragment)fragmentManager.findFragmentById(R.id.main_frame);
-        mapFragment.searchPOI(query);
+        String FRAGMENT_TAG = "LOCATION_TAG";
+        mapFragment = MapFragment.newInstance();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.main_frame, mapFragment, FRAGMENT_TAG);
+        try {
+            mapFragment.searchPOI(query);
+        } catch(IllegalStateException ex) {
+            ex.printStackTrace();
+        }
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+        fragmentTransaction.commit();
     }
 }

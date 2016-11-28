@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TabHost;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -20,6 +21,7 @@ import duribon.dlug.org.duribonduribon.R;
 public class TabsFragment extends Fragment {
     @InjectView(R.id.tabLayout)
     TabLayout tabLayout;
+
     @InjectView(R.id.viewpager)
     ViewPager viewPager;
 

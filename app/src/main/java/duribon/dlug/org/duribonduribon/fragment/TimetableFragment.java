@@ -7,7 +7,9 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -90,6 +92,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
         Log.i(tag, "counter = " + counter);
 
         helper.search_data();
+
         time_line= getResources().getStringArray(R.array.table_times);
         day_line = getResources().getStringArray(R.array.table_days);
 
@@ -120,7 +123,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
             day[i] = new TextView(getActivity());
             day[i].setText(day_line[i]);
             day[i].setGravity(Gravity.CENTER);
-            day[i].setBackgroundColor(Color.parseColor("#FAF4C0"));
+            day[i].setBackgroundColor(Color.parseColor("#FAF4C0")); // 요일 색상
             day[i].setTextSize(10);
             lay_time.addView(day[i], params_2);
         }
@@ -130,7 +133,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
             time[i] = new TextView(getActivity());
             time[i].setText(time_line[i]);
             time[i].setGravity(Gravity.CENTER);
-            time[i].setBackgroundColor(Color.parseColor("#EAEAEA"));
+            time[i].setBackgroundColor(Color.parseColor("#EAEAEA"));    // 각 교시 색상
             time[i].setTextSize(10);
             layouts[i].addView(time[i], params_1);
         }
@@ -145,7 +148,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
                 data[id].setTextSize(10);
                 data[id].setOnClickListener(this);
                 data[id].setGravity(Gravity.CENTER);
-                data[id].setBackgroundColor(Color.parseColor("#EAEAEA"));
+                data[id].setBackgroundColor(Color.parseColor("#EAEAEA"));   // 수업 색상
                 if((cursor != null) && (!cursor.isAfterLast())) {
                     db_id = cursor.getInt(0);
                     db_subject = cursor.getString(1);

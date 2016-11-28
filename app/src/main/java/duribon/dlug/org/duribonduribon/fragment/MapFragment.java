@@ -4,13 +4,16 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -49,11 +52,12 @@ import duribon.dlug.org.duribonduribon.R;
  * Created by neonkid on 10/31/16.
  */
 
-public class MapFragment extends Fragment implements View.OnClickListener {
+public class MapFragment extends Fragment implements View.OnClickListener, SearchView.OnQueryTextListener {
     private TMapView tMapView;
     private Map<String, String> map = new HashMap<>();
     private TMapPoint src, dst;
     private LocationManager mLocationManager;
+    private SearchView mSearchView;
 
     View view;
 
@@ -87,19 +91,16 @@ public class MapFragment extends Fragment implements View.OnClickListener {
 
     public MapFragment() {}
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        onLocationManager();
+    public static MapFragment newInstance() {
+        MapFragment fragment = new MapFragment();
+        return fragment;
     }
 
+
     @Override
-    public void onStop() {
-        super.onStop();
-        if(ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        mLocationManager.removeUpdates(mListener);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
     }
 
     @Override
@@ -108,7 +109,6 @@ public class MapFragment extends Fragment implements View.OnClickListener {
 
         mLocationManager = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
         setHasOptionsMenu(true);
-        setMapData();
     }
 
     @Override
@@ -147,27 +147,51 @@ public class MapFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        onLocationManager();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if(ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        mLocationManager.removeUpdates(mListener);
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        final SearchView mSearchView;
         final MenuItem searchmenuItem;
         menu.clear();
         inflater.inflate(R.menu.search, menu);
         searchmenuItem = menu.findItem(R.id.map_search);
         mSearchView = (SearchView) searchmenuItem.getActionView();
-        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                searchPOI(query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String query) { return false; }
-
-        });
+        mSearchView.setOnQueryTextListener(this);
         inflater.inflate(R.menu.location, menu);
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        searchPOI(query);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
     }
 
     @Override
@@ -182,9 +206,12 @@ public class MapFragment extends Fragment implements View.OnClickListener {
     }
 
     private String Searchcheck(String query) {
-        String result = getString(R.string.Dankook_University);
+        String result = "단국대학교";
+        if(map.isEmpty()) {
+            setMapData();
+        }
 
-        if(query.startsWith(getString(R.string.Dankook_University).substring(0,1))) {
+        if(query.startsWith("단국대학교".substring(0,1))) {
             result = "";
         }
 
@@ -243,6 +270,7 @@ public class MapFragment extends Fragment implements View.OnClickListener {
     private void searchRoute(TMapPoint start, TMapPoint end) {
         TMapData data = new TMapData();
         if(start == null && end == null) {
+            Log.d("[TAG]", "NULL !!!!!!! ---> start OR end");
             return;
         }
         data.findPathDataWithType(TMapData.TMapPathType.CAR_PATH, start, end, new TMapData.FindPathDataListenerCallback() {
@@ -302,23 +330,23 @@ public class MapFragment extends Fragment implements View.OnClickListener {
        사용자가 검색할만한 단어를 중심으로 데이터화,,
      */
     private void setMapData() {
-        map.put("융합기술대학", getString(R.string.Second_Science));
-        map.put("공학관", getString(R.string.Second_Science));
-        map.put("보건대학", getString(R.string.Graduate_School));
-        map.put("보건간호관", getString(R.string.Graduate_School));
-        map.put("간호대학", getString(R.string.Graduate_School));
-        map.put("생자대", getString(R.string.Life_Resource));
-        map.put("외국어대학", getString(R.string.Humanities_college));
-        map.put("외대", getString(R.string.Humanities_college));
-        map.put("인문대", getString(R.string.Humanities_college));
-        map.put("법대", getString(R.string.law_college));
-        map.put("사회과학관", getString(R.string.law_college));
-        map.put("도서관", getString(R.string.Library));
-        map.put("약대", getString(R.string.Medical_college));
-        map.put("약학대학", getString(R.string.Medical_college));
-        map.put("학생회관", getString(R.string.Post_Office));
-        map.put("우체국", getString(R.string.Post_Office));
-        map.put("스포츠과학대학", getString(R.string.sports_college));
+        map.put("융합기술대학", "공학대학");
+        map.put("공학관", "공학대학");
+        map.put("보건대학", "천안 대학원");
+        map.put("보건간호관", "천안 대학원");
+        map.put("간호대학", "천안 대학원");
+        map.put("생자대", "생명자원과학대학");
+        map.put("외국어대학", "인문과학대학");
+        map.put("외대", "인문과학대학");
+        map.put("인문대", "인문과학대학");
+        map.put("법대", "법정대학");
+        map.put("사회과학관", "법정대학");
+        map.put("도서관", "율곡기념관");
+        map.put("약대", "약학관");
+        map.put("약학대학", "약학관");
+        map.put("학생회관", "천안 우체국");
+        map.put("우체국", "천안 우체국");
+        map.put("스포츠과학대학", "체육대학");
     }
 
     @Override
