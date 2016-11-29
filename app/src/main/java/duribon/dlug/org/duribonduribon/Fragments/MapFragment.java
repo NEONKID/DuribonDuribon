@@ -128,7 +128,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
 
                     tMapView.setSightVisible(true);
                     tMapView.setTMapLogoPosition(TMapView.TMapLogoPositon.POSITION_BOTTOMLEFT);
-                    tMapView.setIconVisibility(false);
+                    tMapView.setIconVisibility(true);
 
                     moveMap(36.836609, 127.168095);
                     setMyLocation(36.836609, 127.168095);
