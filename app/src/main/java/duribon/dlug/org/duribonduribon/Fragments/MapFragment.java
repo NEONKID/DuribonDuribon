@@ -355,7 +355,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
     private void setMapData() {
         map.put("융합기술대학", "공학대학");
         map.put("공학관", "공학대학");
-        map.put("보건대학", "천안 대학원");
+        map.put("보건과학대학", "천안 대학원");
         map.put("보건간호관", "천안 대학원");
         map.put("간호대학", "천안 대학원");
         map.put("생자대", "생명자원과학대학");
