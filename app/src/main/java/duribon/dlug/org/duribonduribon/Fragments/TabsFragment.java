@@ -1,4 +1,4 @@
-package duribon.dlug.org.duribonduribon.fragment;
+package duribon.dlug.org.duribonduribon.Fragments;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -7,11 +7,10 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TabHost;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import duribon.dlug.org.duribonduribon.MainActivity;
+import duribon.dlug.org.duribonduribon.Activities.MainActivity;
 import duribon.dlug.org.duribonduribon.R;
 
 /**
@@ -43,8 +42,8 @@ public class TabsFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_map_black_24dp));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_today_black_24dp));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_map_black_24dp)); // 외부 지도 아이콘..
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_today_black_24dp));   // 시간표 아이콘..
 
         TabPagerAdapter adapter = new TabPagerAdapter(getFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);

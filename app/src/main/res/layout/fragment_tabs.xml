@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/AppTheme"
-    tools:context=".fragment.TabsFragment">
+    tools:context=".Fragments.TabsFragment">
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"

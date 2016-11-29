@@ -1,19 +1,16 @@
-package duribon.dlug.org.duribonduribon.fragment;
+package duribon.dlug.org.duribonduribon.Fragments;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -45,18 +42,20 @@ import java.util.Map;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import duribon.dlug.org.duribonduribon.InteriorMapActivity;
+import duribon.dlug.org.duribonduribon.Activities.InteriorMapActivity;
 import duribon.dlug.org.duribonduribon.R;
 
 /**
  * Created by neonkid on 10/31/16.
+ *
+ * 외부 쟈도를 표시하는 Fragment..
  */
 
 public class MapFragment extends Fragment implements View.OnClickListener, SearchView.OnQueryTextListener {
-    private TMapView tMapView;
+    private TMapView tMapView;  // TMapView API
     private Map<String, String> map = new HashMap<>();
     private TMapPoint src, dst;
-    private LocationManager mLocationManager;
+    private LocationManager mLocationManager;   // 현재 위치 서비스하는 매니저,,
     private SearchView mSearchView;
 
     View view;
@@ -65,11 +64,16 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
     CoordinatorLayout coordinatorLayout;
 
     @InjectView(R.id.location_me)
-    FloatingActionButton location_me;
+    FloatingActionButton location_me;   // 경로 탐색시 나타나는 동그라미 버튼..
 
     private LocationListener mListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
+            /*
+                GPS/WPS 위치가 변동되었을 경우,
+                변동된 위치가 단국대학교 천안캠퍼스인지를 검출.
+                해당 위치 범위가 아닐 경우, 단국대학교 대운동장 표시
+             */
             if(location.getLatitude() < 36.832311  && location.getLongitude() < 127.165038) {
                 moveMap(36.836609, 127.168095);
                 setMyLocation(36.836609, 127.168095);
@@ -96,11 +100,9 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
         return fragment;
     }
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
     }
 
     @Override
@@ -108,7 +110,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
         super.onCreate(savedInstanceState);
 
         mLocationManager = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(true);    // Toolbar에 있는 검색과 위치 탐색 visible
     }
 
     @Override
@@ -122,11 +124,11 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
                 @Override
                 public void SKPMapApikeySucceed() {
                     tMapView.setMapType(TMapView.MAPTYPE_STANDARD);
-                    tMapView.setTrafficInfo(true);
+                    tMapView.setTrafficInfo(true);  // TMap 교통 정보..
 
                     tMapView.setSightVisible(true);
                     tMapView.setTMapLogoPosition(TMapView.TMapLogoPositon.POSITION_BOTTOMLEFT);
-                    tMapView.setIconVisibility(true);
+                    tMapView.setIconVisibility(false);
 
                     moveMap(36.836609, 127.168095);
                     setMyLocation(36.836609, 127.168095);
@@ -149,7 +151,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
     @Override
     public void onStart() {
         super.onStart();
-        onLocationManager();
+        onLocationManager();    // 위치 기반 서비스 활성화..
     }
 
     @Override
@@ -168,9 +170,13 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
         if(ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        mLocationManager.removeUpdates(mListener);
+        mLocationManager.removeUpdates(mListener);  // App 중지시, 위치 매니저 비활성화,,
     }
 
+    /*
+        Menu를 생성합니다.
+        Menu에 대한 내용은 menu xml package 참조.
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         final MenuItem searchmenuItem;
@@ -183,6 +189,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    // 검색을 시작합니다.
     @Override
     public boolean onQueryTextSubmit(String query) {
         searchPOI(query);
@@ -205,6 +212,11 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
         }
     }
 
+    /*
+        검색 쿼리를 검사합니다.
+        쿼리를 검사하는 것은 TMap에서 제공하지 않는
+        단국대학교 각 단과 대학 검색을 위해 이용합니다.
+     */
     private String Searchcheck(String query) {
         String result = "단국대학교";
         if(map.isEmpty()) {
@@ -224,15 +236,23 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
         return result;
     }
 
+    // 지도를 이동합니다. Google Map에서 제공하는 좌표와 헷갈리지 않게 하기 위해 사용합니다.
     private void moveMap(double lat, double lng) {
         tMapView.setCenterPoint(lng, lat);
     }
 
+    // 현재 내 위치를 출발지로 선정합니다.
     private void setMyLocation(double lat, double lng) {
         tMapView.setLocationPoint(lng, lat);
         src = new TMapPoint(lat, lng);
     }
 
+    /*
+        검색을 담당하는 종합 메소드입니다.
+        SearchCheck 메소드를 사용해 검색어를 검사하고,
+        검사 후, 지도를 마커에 새깁니다.
+        단국대학교 영역에서 벗어날 경우, 경로 탐색이 지원되지 않습니다.
+     */
     public void searchPOI(String query) {
         query = Searchcheck(query);
         TMapData data = new TMapData();
@@ -267,6 +287,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
         }
     }
 
+    // 출발지와 목적지를 선택하고, 빨간색 선으로 지도에 도식합니다.
     private void searchRoute(TMapPoint start, TMapPoint end) {
         TMapData data = new TMapData();
         if(start == null && end == null) {
@@ -296,6 +317,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
         });
     }
 
+    // 출발지와 목적지에 마커를 찍습니다.
     private void addMarker(TMapPOIItem poi) {
         TMapMarkerItem item = new TMapMarkerItem();
         item.setTMapPoint(poi.getPOIPoint());
@@ -311,6 +333,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
         tMapView.addMarkerItem(poi.getPOIID(), item);
     }
 
+    // 경로 탐색시 나타나는 동그라미 버튼에 대한 메소드.
     @OnClick(R.id.location_me)
     public void locationPin() {
         Snackbar.make(coordinatorLayout, getString(R.string.location_question), Snackbar.LENGTH_LONG)

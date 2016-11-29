@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     app:layout_scrollFlags="scroll|exitUntilCollapsed"
-    tools:context=".fragment.MapFragment">
+    tools:context=".Fragments.MapFragment">
 
     <com.skp.Tmap.TMapView
         android:id="@+id/tMapView"

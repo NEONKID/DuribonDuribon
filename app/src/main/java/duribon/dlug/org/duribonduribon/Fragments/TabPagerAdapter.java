@@ -1,4 +1,4 @@
-package duribon.dlug.org.duribonduribon.fragment;
+package duribon.dlug.org.duribonduribon.Fragments;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -21,9 +21,9 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch(position) {
             case 0:
-                return new MapFragment();
+                return new MapFragment();   // 외부 지도
             case 1:
-                return new TimetableFragment();
+                return new TimetableFragment(); // 시간표
         }
         return null;
     }

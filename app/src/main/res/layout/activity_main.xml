@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:theme="@style/AppTheme.LayoutOverlay"
-    tools:context=".MainActivity">
+    tools:context=".Activities.MainActivity">
     
     <android.support.v7.widget.Toolbar
         android:id="@+id/main_tool_bar"

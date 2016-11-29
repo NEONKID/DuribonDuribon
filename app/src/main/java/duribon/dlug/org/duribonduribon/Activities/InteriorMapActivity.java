@@ -1,4 +1,4 @@
-package duribon.dlug.org.duribonduribon;
+package duribon.dlug.org.duribonduribon.Activities;
 
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -8,16 +8,19 @@ import android.view.MenuItem;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import duribon.dlug.org.duribonduribon.R;
 
 /**
  * Created by neonkid on 11/5/16.
+ *
+ * 내부 지도를 구현한 Activity,,
  */
 
 public class InteriorMapActivity extends AppCompatActivity {
     @InjectView(R.id.toolbar)
     Toolbar toolBar;
     @InjectView(R.id.collapsingToolbarLayout)
-    CollapsingToolbarLayout collapsingToolbarLayout;
+    CollapsingToolbarLayout collapsingToolbarLayout;    // 내부 지도 레이아웃..
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +38,7 @@ public class InteriorMapActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                finish();   // Back 버튼을 누르면, Activity 종료..
                 return true;
         }
         return super.onOptionsItemSelected(item);

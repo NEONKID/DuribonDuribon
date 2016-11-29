@@ -1,4 +1,4 @@
-package duribon.dlug.org.duribonduribon.fragment;
+package duribon.dlug.org.duribonduribon.Fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -7,23 +7,17 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -33,6 +27,8 @@ import duribon.dlug.org.duribonduribon.R;
 
 /**
  * Created by neonkid on 10/31/16.
+ *
+ * 시간표 Fragment
  */
 
 public class TimetableFragment extends Fragment implements View.OnClickListener {
