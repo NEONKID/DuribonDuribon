@@ -36,4 +36,10 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="696dp"
+        app:srcCompat="@drawable/Test"
+        android:id="@+id/imageView" />
+
 </android.support.design.widget.CoordinatorLayout>
