@@ -56,7 +56,6 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
     private Map<String, String> map = new HashMap<>();
     private TMapPoint src, dst;
     private LocationManager mLocationManager;   // 현재 위치 서비스하는 매니저,,
-    private SearchView mSearchView;
 
     View view;
 
@@ -179,6 +178,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
      */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        final SearchView mSearchView;
         final MenuItem searchmenuItem;
         menu.clear();
         inflater.inflate(R.menu.search, menu);
@@ -288,7 +288,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
     }
 
     // 출발지와 목적지를 선택하고, 빨간색 선으로 지도에 도식합니다.
-    private void searchRoute(TMapPoint start, TMapPoint end) {
+    private void searchRoute(final TMapPoint start, TMapPoint end) {
         TMapData data = new TMapData();
         if(start == null && end == null) {
             Log.d("[TAG]", "NULL !!!!!!! ---> start OR end");
@@ -355,8 +355,11 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
     private void setMapData() {
         map.put("융합기술대학", "공학대학");
         map.put("공학관", "공학대학");
+        map.put("융기대", "공학대학");
+        map.put("공대", "공학대학");
         map.put("보건과학대학", "천안 대학원");
         map.put("보건간호관", "천안 대학원");
+        map.put("보건대", "천안 대학원");
         map.put("간호대학", "천안 대학원");
         map.put("생자대", "생명자원과학대학");
         map.put("외국어대학", "인문과학대학");

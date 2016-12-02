@@ -28,7 +28,6 @@ import duribon.dlug.org.duribonduribon.Fragments.TimetableFragment;
 public class MainActivity extends AppCompatActivity implements TimetableFragment.CustomSearchPOI {
     @InjectView(R.id.main_tool_bar)
     Toolbar toolbar;
-    private MapFragment mapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements TimetableFragment
         Calendar cal = Calendar.getInstance();
         final int month = cal.get(cal.MONTH) + 1;
         toolbar.setBackgroundResource(setSeasonColor(month));
-
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             window.setStatusBarColor(this.getColor(setSeasonColor(month)));
         } else if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
@@ -83,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements TimetableFragment
     @Override
     public void requestSearch(String query) {
         String FRAGMENT_TAG = "LOCATION_TAG";
-        mapFragment = MapFragment.newInstance();
+        MapFragment mapFragment = MapFragment.newInstance();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.main_frame, mapFragment, FRAGMENT_TAG);
         try {
