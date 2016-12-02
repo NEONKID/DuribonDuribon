@@ -17,6 +17,32 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+}
+android {
+    sourceSets {
+        main {
+            jni.srcDirs = []
+        }
+    }
+}
+
+
+task ndkBuild(type: Exec, description: 'Compile JNI source via NDK') {
+    def ndkDir = project.plugins.findPlugin('com.android.application').sdkHandler.getNdkFolder()
+    commandLine "$ndkDir\\ndk-build.cmd ",
+            'NDK_PROJECT_PATH=build\\intermediates\\ndk',
+            'NDK_LIBS_OUT=src\\main\\JniLibs',
+            'APP_BUILD_SCRIPT=src\\main\\jni\\Android.mk',
+            'NDK_APPLICATION_MK=src\\main\\jni\\Application.mk'
+}
+
+tasks.withType(JavaCompile) {
+    compileTask -> compileTask.dependsOn ndkBuild
 }
 
 dependencies {
@@ -31,4 +57,5 @@ dependencies {
     compile 'com.android.support:support-annotations:25.0.0'
     debugCompile 'com.facebook.stetho:stetho:1.4.1'
     compile files('libs/com.skp.Tmap_1.0.44.jar')
+    compile project(':openCVLibrary310')
 }

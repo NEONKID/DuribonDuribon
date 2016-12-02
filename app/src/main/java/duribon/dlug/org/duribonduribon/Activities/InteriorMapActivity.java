@@ -1,10 +1,12 @@
 package duribon.dlug.org.duribonduribon.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -15,10 +17,7 @@ import duribon.dlug.org.duribonduribon.R;
  *
  * 내부 지도를 구현한 Activity,,
  */
-
 public class InteriorMapActivity extends AppCompatActivity {
-    @InjectView(R.id.toolbar)
-    Toolbar toolBar;
     @InjectView(R.id.collapsingToolbarLayout)
     CollapsingToolbarLayout collapsingToolbarLayout;    // 내부 지도 레이아웃..
 
@@ -27,9 +26,6 @@ public class InteriorMapActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interiormap);
         ButterKnife.inject(this);
-
-        setSupportActionBar(toolBar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         collapsingToolbarLayout.setTitle(getString(R.string.Interior_Map));
     }
@@ -42,5 +38,10 @@ public class InteriorMapActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void nextFloor(View v){
+        Intent intent = new Intent(this, DestinationMapActivity.class);
+        startActivity(intent);
     }
 }
