@@ -7,10 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import duribon.dlug.org.duribonduribon.R;
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * Created by neonkid on 11/5/16.
@@ -28,6 +30,9 @@ public class InteriorMapActivity extends AppCompatActivity {
         ButterKnife.inject(this);
 
         collapsingToolbarLayout.setTitle(getString(R.string.Interior_Map));
+        PhotoViewAttacher attacher;
+        ImageView imageView = (ImageView)findViewById(R.id.imageView);
+        attacher = new PhotoViewAttacher(imageView);
     }
 
     @Override
