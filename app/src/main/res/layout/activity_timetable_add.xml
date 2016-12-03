@@ -42,7 +42,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="캠 퍼 스  :"
+            android:text="대학 선택  :"
             android:textColor="#000000"
             android:textSize="15sp" />
 
@@ -77,54 +77,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:inputType="numberSigned"
+            android:digits="0123456789-"
             android:hint="강의실을 입력하세요."/>
 
     </LinearLayout>
-
-    <!--
-    <LinearLayout
-        android:id="@+id/linear4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="시 간 대  :"
-            android:textColor="#000000"
-            android:textSize="15sp"/>
-
-        <EditText
-            android:id="@+id/input_startTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint=""/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="부터 "
-            android:textColor="#000000"
-            android:textSize="15sp" />
-
-        <EditText
-            android:id="@+id/input_endTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint=""/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="까지"
-            android:textColor="#000000"
-            android:textSize="15sp" />
-
-    </LinearLayout>
-    -->
 
 </LinearLayout>

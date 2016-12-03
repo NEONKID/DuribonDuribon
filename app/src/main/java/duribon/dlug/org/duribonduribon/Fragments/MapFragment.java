@@ -2,6 +2,7 @@ package duribon.dlug.org.duribonduribon.Fragments;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -17,6 +18,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
 import android.util.Log;
@@ -27,6 +29,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.skp.Tmap.TMapData;
 import com.skp.Tmap.TMapMarkerItem;
@@ -37,6 +40,7 @@ import com.skp.Tmap.TMapView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import butterknife.ButterKnife;
@@ -56,6 +60,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
     private Map<String, String> map = new HashMap<>();
     private TMapPoint src, dst;
     private LocationManager mLocationManager;   // 현재 위치 서비스하는 매니저,,
+    public static boolean room_flag = false;
 
     View view;
 
@@ -219,6 +224,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
      */
     private String Searchcheck(String query) {
         String result = "단국대학교";
+        boolean flag = false;
         if(map.isEmpty()) {
             setMapData();
         }
@@ -227,12 +233,18 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
             result = "";
         }
 
-        if(map.containsKey(query)) {
-            result += map.get(query);
-        } else {
+        Iterator iterator = map.entrySet().iterator();
+        while(iterator.hasNext()) {
+            Map.Entry entry = (Map.Entry)iterator.next();
+            if(entry.getKey().toString().contains(query)) {
+                result += entry.getValue().toString();
+                flag = true;
+                break;
+            }
+        }
+        if(!flag) {
             result += query;
         }
-
         return result;
     }
 
@@ -340,8 +352,31 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
                 .setAction("OK", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getActivity(), InteriorMapActivity.class);
-                        startActivity(intent);
+                        if(!room_flag) {
+                            final AlertDialog.Builder input_room = new AlertDialog.Builder(getActivity());
+                            final LinearLayout dig_layout2 = (LinearLayout)View.inflate(getActivity(), R.layout.fragment_innerdialog, null);
+                            input_room.setTitle("강의실 입력");
+                            input_room.setView(dig_layout2);
+                            input_room.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    // 데이터 내부 지도로 전송..
+                                    Intent intent = new Intent(getActivity(), InteriorMapActivity.class);
+                                    startActivity(intent);
+                                }
+                            });
+                            input_room.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    // 그냥 아무 작업 안함,,
+                                }
+                            });
+                            input_room.show();
+                        } else {
+                            // 시간표에서 데이터 전송,,
+                            Intent intent = new Intent(getActivity(), InteriorMapActivity.class);
+                            startActivity(intent);
+                        }
                     }
                 })
                 .setActionTextColor(getResources().getColor(R.color.color_primary))

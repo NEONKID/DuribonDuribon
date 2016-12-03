@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import duribon.dlug.org.duribonduribon.Fragments.MapFragment;
 import duribon.dlug.org.duribonduribon.R;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
@@ -29,6 +30,14 @@ public class InteriorMapActivity extends AppCompatActivity {
         setContentView(R.layout.activity_interiormap);
         ButterKnife.inject(this);
 
+<<<<<<< Updated upstream
+=======
+        MapFragment.room_flag = false;  // 원상 복귀,,
+
+        setSupportActionBar(toolBar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+>>>>>>> Stashed changes
         collapsingToolbarLayout.setTitle(getString(R.string.Interior_Map));
         PhotoViewAttacher attacher;
         ImageView entrance = (ImageView)findViewById(R.id.entrance);

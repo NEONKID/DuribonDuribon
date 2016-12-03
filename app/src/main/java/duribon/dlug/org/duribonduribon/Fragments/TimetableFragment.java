@@ -227,6 +227,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener 
         choice_dialog.setPositiveButton(getString(R.string.Location_navigate), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                MapFragment.room_flag = true;
                 customSearchPOI.requestSearch(out_college.getText().toString());
             }
         });
