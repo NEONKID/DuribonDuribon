@@ -31,6 +31,10 @@
             android:name=".Activities.InteriorMapActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+            android:name=".Activities.DestinationMapActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
