@@ -31,8 +31,18 @@ public class InteriorMapActivity extends AppCompatActivity {
 
         collapsingToolbarLayout.setTitle(getString(R.string.Interior_Map));
         PhotoViewAttacher attacher;
-        ImageView imageView = (ImageView)findViewById(R.id.imageView);
-        attacher = new PhotoViewAttacher(imageView);
+        ImageView entrance = (ImageView)findViewById(R.id.entrance);
+        attacher = new PhotoViewAttacher(entrance);
+        /*if()
+        {
+        //검색 값에 따라서 보여주는 층수를 다르게 해야함
+        }
+        else //1층인 경우
+        {
+            //버튼을 없애야함.
+        }
+        */
+
     }
 
     @Override
@@ -49,4 +59,11 @@ public class InteriorMapActivity extends AppCompatActivity {
         Intent intent = new Intent(this, DestinationMapActivity.class);
         startActivity(intent);
     }
+    /*
+    public class OpenCV {
+        static {
+            System.loadLibrary("hello");
+        }
+        public native String getHelloNDKString();
+    }*/
 }

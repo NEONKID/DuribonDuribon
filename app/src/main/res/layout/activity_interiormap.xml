@@ -22,17 +22,17 @@
 
     <ImageView
         android:layout_width="match_parent"
-        app:srcCompat="@drawable/first"
-        android:id="@+id/imageView"
+        app:srcCompat="@drawable/firstf"
         android:layout_height="wrap_content" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="nextFloor"
-        app:layout_anchor="@+id/imageView"
+        android:id="@+id/nextscene"
+        app:layout_anchor="@+id/entrance"
         app:layout_anchorGravity="bottom|right"
         android:layout_gravity="top|left"
-        android:text="next scene" />
+        android:text="Destination Floor" />
 
 </android.support.design.widget.CoordinatorLayout>
