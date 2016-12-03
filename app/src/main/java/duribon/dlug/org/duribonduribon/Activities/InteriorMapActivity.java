@@ -30,14 +30,8 @@ public class InteriorMapActivity extends AppCompatActivity {
         setContentView(R.layout.activity_interiormap);
         ButterKnife.inject(this);
 
-<<<<<<< Updated upstream
-=======
         MapFragment.room_flag = false;  // 원상 복귀,,
 
-        setSupportActionBar(toolBar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
->>>>>>> Stashed changes
         collapsingToolbarLayout.setTitle(getString(R.string.Interior_Map));
         PhotoViewAttacher attacher;
         ImageView entrance = (ImageView)findViewById(R.id.entrance);
@@ -53,17 +47,7 @@ public class InteriorMapActivity extends AppCompatActivity {
         */
 
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();   // Back 버튼을 누르면, Activity 종료..
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
+    
     public void nextFloor(View v){
         Intent intent = new Intent(this, DestinationMapActivity.class);
         startActivity(intent);
