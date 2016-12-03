@@ -45,7 +45,7 @@ android {
 
     task ndkBuild(type: Exec, description: 'Compile JNI source via NDK') {
         def ndkDir = project.plugins.findPlugin('com.android.application').sdkHandler.getNdkFolder()
-        commandLine "$ndkDir\\ndk-build.cmd ",
+        commandLine "$ndkDir\\ndk-build",
                 'NDK_PROJECT_PATH=build\\intermediates\\ndk',
                 'NDK_LIBS_OUT=src\\main\\JniLibs',
                 'APP_BUILD_SCRIPT=src\\main\\jni\\Android.mk',
