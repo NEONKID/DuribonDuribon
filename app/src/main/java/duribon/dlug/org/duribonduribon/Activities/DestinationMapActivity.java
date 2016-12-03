@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import duribon.dlug.org.duribonduribon.R;
-import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * Created by wnsud on 2016-12-01.
@@ -27,9 +26,9 @@ public class DestinationMapActivity extends AppCompatActivity {
 
 
         collapsingToolbarLayout.setTitle(getString(R.string.Interior_Map));
-        PhotoViewAttacher attacher;
+        /*PhotoViewAttacher attacher;
         ImageView destination = (ImageView)findViewById(R.id.destination);
-        attacher = new PhotoViewAttacher(destination);
+        attacher = new PhotoViewAttacher(destination);*/
     }
 
     @Override

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/home/neonkid/.gradle/caches/modules-2/files-2.1/commons-cli/commons-cli/1.2/2bf96b7aa8b611c177d329452af1dc933e14501c/commons-cli-1.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="2bf96b7aa8b611c177d329452af1dc933e14501c">
+        <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/pre-dexed/debug/commons-cli-1.2_3a74710be35bafcd050cdfea11b255b6bb531543.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.0.0/jars/libs/internal_impl-25.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
+        <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.0_69459533231bcd37ef24a93e9344852033e403cd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/exploded-aar/com.android.support/transition/25.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="0c6d948e6cb9ea6f535d175fb61ba2930719c0e9">
+        <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/pre-dexed/debug/com.android.support-transition-25.0.0_638a9034498960937d4e45ac1ba1d275eff68f24.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="5e497d60f0cb6ce87c458ac5420a46d0fed49bd0">
+        <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-25.0.0_50e89c45659ef28060dc844af96b5355b6b565e8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="53a420cd4f49274db6bd43475f8006ba67ef6bbd">
+        <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-25.0.0_02f24ae93f93cf9de23155713fd770d2a80c4791.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.0/jars/libs/internal_impl-25.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="f2e3b9bc1ec25f652e8007ce7774c991e38f6a00">
+        <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.0_c4ae233ce7b21d5c68df38d3575a55ad7874808b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/libs/com.skp.Tmap_1.0.44.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="68476e72da63bc72bbfdbddb03b10353751e8316">
+        <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/pre-dexed/debug/com.skp.Tmap_1.0.44_19a570a3a72dfb7c2b34851780b1b9c1937e7b22.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/exploded-aar/com.android.support/design/25.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="26384be22ddc74cfe197ebda9edbc7d1fd8bd537">
+        <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/pre-dexed/debug/com.android.support-design-25.0.0_2ae25307ec13d43cd57d3ff4b3e50805f36bb4eb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="8bc45ce1f63d1a391fd38b32a201be5a42f9c95d">
+        <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-25.0.0_279c0e61f41cbd69cb99ddcf4b60d98fd3eb07cb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/neonkid/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/2.0.1/516c03b21d50a644d538de0f0369c620989cd8f0/jsr305-2.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="516c03b21d50a644d538de0f0369c620989cd8f0">
+        <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/pre-dexed/debug/jsr305-2.0.1_4940bf5b94db2c9262ef759ed0cdcf9bd0f1451e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/neonkid/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/25.0.0/support-annotations-25.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="a22d2cc94da87b254451fa8ed28afc30b4653773">
+        <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/pre-dexed/debug/support-annotations-25.0.0_f7f286f13d26317eb6cd7415ea6ec8110e25b70a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="26674000177e45447a0326a6ad84612761199a13">
+        <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-ui-25.0.0_cb485a1d24a453f6f9ec90b195a59caf2767a64a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="76fb65a4b41ea42dab8a1310ed772a2420c96b52">
+        <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/pre-dexed/debug/com.android.support-support-media-compat-25.0.0_653a1d2b8790470fab0dd028cf97a96600b1b879.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="d29714cc76b38157e3cbd034c66e1ec808eb4c19">
+        <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-25.0.0_371666f0b19c9e1a779810b3ddfea9a6c92f070b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-25.0.0_43296d28f23184e2bdbc9da95bb222c8828d62ca.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="4ccbcda5c72027c7f7c14be9ff8640d9cb0d8da0">
+        <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-utils-25.0.0_1ec5322ea6b146ae3eb1f6e142f5f887e6819849.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.0/jars/libs/internal_impl-25.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="ee5faf4dee5b6a4364bf51587871047dde7c703a">
+        <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.0_c465692434feee8258fcbbec1a6a6c8ede3e665b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.0.0/jars/libs/internal_impl-25.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="665d21a8a069c96b4d9e8b434f5096d865b4e261">
+        <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.0_f412c1026f87ee8b0583329116306d19e4a91adb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="d2545d272f1e5d7a3d3f3549a2d1fd59fe4d1ee9">
+        <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/pre-dexed/debug/instant-run_07d2d84f02b22fe275bc039b31d23e3b1cc79572.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/neonkid/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife/6.1.0/63735f48b82bcd24cdd33821342428252eb1ca5a/butterknife-6.1.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="63735f48b82bcd24cdd33821342428252eb1ca5a">
+        <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/pre-dexed/debug/butterknife-6.1.0_47f2e8d8bcc7af6e4eb1cac177abfb07c7f906dd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="f96d2e46985ab8a695d5208c009de77af27a3b94">
+        <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/pre-dexed/debug/instant-run-bootstrap_0ef3e171a09e788df5bfb75f8f10137b9987bc73.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.0.0/jars/libs/internal_impl-25.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="3b61a70884adaf0be3fc06c70c801e3e6df13133">
+        <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.0_1f7653a7a9b520115d1661dd5825210d5b213e44.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/exploded-aar/com.facebook.stetho/stetho/1.4.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="26b6f0185cbba8917ba9d9d0bd170f95311622ab">
+        <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/pre-dexed/debug/com.facebook.stetho-stetho-1.4.1_f9ed64afb3476fcfbd55a3c53ba86997fb43560e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="75b1f366ff0bbc78f8b1f7cf0dc82e7c53afef6a">
+        <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/pre-dexed/debug/com.android.support-support-compat-25.0.0_9685db0a339ed29f0e9f3413bd81745c2ecec807.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="07daa0b6e1d455c82a38422ffe287c18823d339a">
+        <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/pre-dexed/debug/com.android.support-support-fragment-25.0.0_d6ced04b0db11b3dec51c02a7759001271df756b.jar" />
+    </item>
+
+</items>
