@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import duribon.dlug.org.duribonduribon.Fragments.MapFragment;
 import duribon.dlug.org.duribonduribon.R;
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * Created by neonkid on 11/5/16.
@@ -27,12 +29,11 @@ public class InteriorMapActivity extends AppCompatActivity {
         ButterKnife.inject(this);
 
         MapFragment.room_flag = false;  // 원상 복귀,,
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         collapsingToolbarLayout.setTitle(getString(R.string.Interior_Map));
 
-        /*PhotoViewAttacher attacher;
+        PhotoViewAttacher attacher;
         ImageView entrance = (ImageView)findViewById(R.id.entrance);
-        attacher = new PhotoViewAttacher(entrance);*/
+        attacher = new PhotoViewAttacher(entrance);
         /*if()
         {
         //검색 값에 따라서 DestinationMap에서 보여주는 층수를 다르게 해야함
