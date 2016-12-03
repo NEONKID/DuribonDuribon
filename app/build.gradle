@@ -22,7 +22,7 @@ android {
             path "CMakeLists.txt"
         }
     }
-    defaultConfig {
+    /*defaultConfig {
         //...생략
         ndk {
             moduleName "hello"
@@ -32,6 +32,7 @@ android {
             jni.srcDirs = []
             jniLibs.srcDir 'src/main/libs'
         }
+        */
     }
     android {
         sourceSets {
@@ -70,4 +71,3 @@ android {
         compile project(':openCVLibrary310')
         compile 'com.github.chrisbanes:PhotoView:1.3.0'
     }
-}

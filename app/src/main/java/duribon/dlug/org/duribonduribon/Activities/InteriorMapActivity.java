@@ -31,14 +31,14 @@ public class InteriorMapActivity extends AppCompatActivity {
         ButterKnife.inject(this);
 
         MapFragment.room_flag = false;  // 원상 복귀,,
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         collapsingToolbarLayout.setTitle(getString(R.string.Interior_Map));
         PhotoViewAttacher attacher;
         ImageView entrance = (ImageView)findViewById(R.id.entrance);
         attacher = new PhotoViewAttacher(entrance);
         /*if()
         {
-        //검색 값에 따라서 보여주는 층수를 다르게 해야함
+        //검색 값에 따라서 DestinationMap에서 보여주는 층수를 다르게 해야함
         }
         else //1층인 경우
         {
