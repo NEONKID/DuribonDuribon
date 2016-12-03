@@ -3,7 +3,7 @@
 
 extern "C"
 jstring
-Java_com_example_wnsud_ndk_1practice_MainActivity_stringFromJNI(
+Java_duribon_dlug_org_duribonduribon_Activities_MainActivity_hello(
         JNIEnv *env,
         jobject /* this */) {
     std::string hello = "Hello from C++";

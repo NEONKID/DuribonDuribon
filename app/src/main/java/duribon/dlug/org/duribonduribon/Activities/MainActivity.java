@@ -93,4 +93,9 @@ public class MainActivity extends AppCompatActivity implements TimetableFragment
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
         fragmentTransaction.commit();
     }
+
+    static {
+        System.loadLibrary("hello");
+    }
+    public native String hello();
 }
