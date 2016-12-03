@@ -33,6 +33,7 @@ public class InteriorMapActivity extends AppCompatActivity {
         MapFragment.room_flag = false;  // 원상 복귀,,
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         collapsingToolbarLayout.setTitle(getString(R.string.Interior_Map));
+
         PhotoViewAttacher attacher;
         ImageView entrance = (ImageView)findViewById(R.id.entrance);
         attacher = new PhotoViewAttacher(entrance);
