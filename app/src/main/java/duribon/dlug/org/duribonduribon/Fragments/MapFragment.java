@@ -29,7 +29,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.skp.Tmap.TMapData;
 import com.skp.Tmap.TMapMarkerItem;
@@ -69,6 +71,10 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
 
     @InjectView(R.id.location_me)
     FloatingActionButton location_me;   // 경로 탐색시 나타나는 동그라미 버튼..
+
+    public interface settheFloor {
+        void setFloor(String floor);
+    }
 
     private LocationListener mListener = new LocationListener() {
         @Override
@@ -355,14 +361,15 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
                         if(!room_flag) {
                             final AlertDialog.Builder input_room = new AlertDialog.Builder(getActivity());
                             final LinearLayout dig_layout2 = (LinearLayout)View.inflate(getActivity(), R.layout.fragment_innerdialog, null);
+                            final EditText editText = (EditText)dig_layout2.findViewById(R.id.dialog_input_classroom);
                             input_room.setTitle("강의실 입력");
                             input_room.setView(dig_layout2);
                             input_room.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    // 데이터 내부 지도로 전송..
+                                    // 데이터 내부 지도로 전송...
                                     Intent intent = new Intent(getActivity(), InteriorMapActivity.class);
-
+                                    intent.putExtra("data", editText.getText());
                                     startActivity(intent);
                                     getActivity().overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
                                 }
