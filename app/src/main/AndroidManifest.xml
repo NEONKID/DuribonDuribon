@@ -15,7 +15,7 @@
 
         <activity
             android:name=".Activities.IntroAppActivity"
-            android:theme="@style/AppTheme.IntroTheme"
+            android:theme="@style/AppTheme.SplashScreen"
             android:configChanges="keyboardHidden|orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

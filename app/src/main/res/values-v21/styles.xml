@@ -11,7 +11,7 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@color/color_blank</item>
     </style>
-    <style name="AppTheme.IntroTheme">
+    <style name="AppTheme.SplashScreen">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowBackground">@drawable/splash_screen</item>

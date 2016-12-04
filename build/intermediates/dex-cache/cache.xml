@@ -196,7 +196,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="7a970d3560e099e6591a1fdcb4d9784385ceaf78">
+        sha1="600cff027976cc93746d5083b721dde3dcf7aa39">
         <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_0ef3e171a09e788df5bfb75f8f10137b9987bc73/classes.dex" />
     </item>
     <item
