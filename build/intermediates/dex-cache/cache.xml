@@ -43,7 +43,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="e31156e3164d6e8db2fff2f5d769b1a3ace53407">
+        sha1="3c6c98f00e08a686eea0846e90bf5b9e5172691a">
         <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_07d2d84f02b22fe275bc039b31d23e3b1cc79572/classes.dex" />
     </item>
     <item
@@ -169,7 +169,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="c9a543265e59085a752335b5c5ef8928156c1f52">
+        sha1="0893a4f230444383b6dc83f053c335729744fe69">
         <dex dex="/home/neonkid/AndroidStudioProjects/DuribonDuribon/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_0ef3e171a09e788df5bfb75f8f10137b9987bc73/classes.dex" />
     </item>
     <item

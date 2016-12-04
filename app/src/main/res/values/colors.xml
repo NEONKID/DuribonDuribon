@@ -6,11 +6,7 @@
     <color name="color_spring">#4caf50</color>
     <color name="color_summer">#03A9F4</color>
     <color name="color_fall">#FF5722</color>
-
-    <!--
-         0f1b67 -> 첫번째 후보,
-      -->
-    <color name="color_winter">#304862</color>
+    <color name="color_winter">#424242</color>
     <color name="color_blank">#FFFFFF</color>
     <color name="color_black">#000000</color>
 </resources>
