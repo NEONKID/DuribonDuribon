@@ -363,6 +363,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
                                     // 데이터 내부 지도로 전송..
                                     Intent intent = new Intent(getActivity(), InteriorMapActivity.class);
                                     startActivity(intent);
+                                    getActivity().overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
                                 }
                             });
                             input_room.setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -376,6 +377,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
                             // 시간표에서 데이터 전송,,
                             Intent intent = new Intent(getActivity(), InteriorMapActivity.class);
                             startActivity(intent);
+                            getActivity().overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
                         }
                     }
                 })

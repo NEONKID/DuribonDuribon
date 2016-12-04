@@ -1,6 +1,7 @@
 package duribon.dlug.org.duribonduribon.Activities;
 
 import android.os.Build;
+import android.os.Process;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -64,6 +65,13 @@ public class MainActivity extends AppCompatActivity implements TimetableFragment
     // Toolbar Title 변경..
     public void setActionBarTitle(String title) {
         toolbar.setTitle(title);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.anim_slide_in_top, R.anim.anim_slide_out_bottom);
+        android.os.Process.killProcess(Process.myPid());
     }
 
     // 계절별로 색깔을 변경,,

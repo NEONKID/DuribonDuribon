@@ -29,11 +29,11 @@
         </activity>
         <activity
             android:name=".Activities.InteriorMapActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.InteriorMap">
         </activity>
         <activity
             android:name=".Activities.DestinationMapActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.InteriorMap">
         </activity>
     </application>
 

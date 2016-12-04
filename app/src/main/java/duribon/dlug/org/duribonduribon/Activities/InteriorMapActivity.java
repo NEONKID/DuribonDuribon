@@ -1,11 +1,13 @@
 package duribon.dlug.org.duribonduribon.Activities;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 
 import butterknife.ButterKnife;
@@ -34,6 +36,7 @@ public class InteriorMapActivity extends AppCompatActivity {
         PhotoViewAttacher attacher;
         ImageView entrance = (ImageView)findViewById(R.id.entrance);
         attacher = new PhotoViewAttacher(entrance);
+
         /*if()
         {
         //검색 값에 따라서 DestinationMap에서 보여주는 층수를 다르게 해야함
@@ -46,8 +49,8 @@ public class InteriorMapActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+    public void finish() {
+        super.finish();
         overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
     }
 
