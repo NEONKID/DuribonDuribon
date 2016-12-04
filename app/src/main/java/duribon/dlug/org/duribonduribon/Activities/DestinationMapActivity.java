@@ -1,13 +1,8 @@
 package duribon.dlug.org.duribonduribon.Activities;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
-import android.view.Window;
-import android.widget.ImageView;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
