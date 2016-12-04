@@ -16,6 +16,5 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowBackground">@drawable/splash_screen</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:windowTranslucentStatus">@color/color_black</item>
     </style>
 </resources>
