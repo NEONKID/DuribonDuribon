@@ -27,6 +27,7 @@ public class InteriorMapActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_interiormap);
 
         String lecture;
         Intent intent = getIntent();
@@ -34,15 +35,12 @@ public class InteriorMapActivity extends AppCompatActivity {
 
         ImageView imageView = (ImageView)findViewById(R.id.destination);
 
-        if(lecture.charAt(0) ==2)
-        {
+        if(lecture.charAt(0) ==2) {
             imageView.setImageResource(R.drawable.testsecond);
         }
-        else //1층인 경우
-        {
+        else { //1층인 경우
             //버튼을 없애야함.
         }
-        setContentView(R.layout.activity_interiormap);
 
         MapFragment.room_flag = false;  // 원상 복귀,,
 
@@ -56,10 +54,6 @@ public class InteriorMapActivity extends AppCompatActivity {
 
         CoordinatorLayout container = (CoordinatorLayout) findViewById(R.id.dest_content);
         container.addView(zoomView);
-
-
-
-
     }
 
 
