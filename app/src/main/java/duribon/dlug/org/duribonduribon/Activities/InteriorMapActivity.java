@@ -2,7 +2,6 @@ package duribon.dlug.org.duribonduribon.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -35,6 +34,7 @@ public class InteriorMapActivity extends AppCompatActivity {
 
         MapFragment.room_flag = false;  // 원상 복귀,,
 
+<<<<<<< HEAD
         View v = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.activity_interiormap, null, false);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
@@ -45,6 +45,12 @@ public class InteriorMapActivity extends AppCompatActivity {
 
         CoordinatorLayout container = (CoordinatorLayout) findViewById(R.id.dest_content);
         container.addView(zoomView);
+=======
+        PhotoViewAttacher attacher;
+        ImageView entrance = (ImageView)findViewById(R.id.entrance);
+        attacher = new PhotoViewAttacher(entrance);
+
+>>>>>>> 763e886d927e61ef04dd2f69e718e56c04e5bc5b
         /*if()
         {
         //검색 값에 따라서 DestinationMap에서 보여주는 층수를 다르게 해야함
@@ -58,8 +64,8 @@ public class InteriorMapActivity extends AppCompatActivity {
 
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+    public void finish() {
+        super.finish();
         overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
     }
 

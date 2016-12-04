@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Process;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -59,7 +60,7 @@ public class IntroAppActivity extends AppCompatActivity {
                     break;
                 } else {
                     Log.d("[INFO]", "User Permission Deny");
-                    System.exit(0); // 권한 요구를 거부할 경우, 앱을 종료한다.
+                    android.os.Process.killProcess(Process.myPid()); // 권한 요구를 거부할 경우, 앱을 종료한다.
                 }
                 return;
         }

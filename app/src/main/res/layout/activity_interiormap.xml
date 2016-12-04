@@ -8,6 +8,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
+<<<<<<< HEAD
     <ImageView
         android:layout_width="match_parent"
         app:srcCompat="@drawable/secondf"
@@ -237,6 +238,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
+=======
+>>>>>>> 763e886d927e61ef04dd2f69e718e56c04e5bc5b
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -344,6 +347,9 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 763e886d927e61ef04dd2f69e718e56c04e5bc5b
 </android.support.design.widget.CoordinatorLayout>

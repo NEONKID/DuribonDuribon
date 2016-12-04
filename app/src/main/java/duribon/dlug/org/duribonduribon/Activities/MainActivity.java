@@ -1,14 +1,13 @@
 package duribon.dlug.org.duribonduribon.Activities;
 
 import android.os.Build;
+import android.os.Process;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Window;
-
-import com.facebook.stetho.Stetho;
 
 import java.util.Calendar;
 
@@ -22,7 +21,7 @@ import duribon.dlug.org.duribonduribon.Fragments.TimetableFragment;
 /**
  * Created by neonkid on 11/5/16.
  *
- * Application의 메인 Activity..
+ * Application의 Main Activity..
  */
 
 public class MainActivity extends AppCompatActivity implements TimetableFragment.CustomSearchPOI {
@@ -32,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements TimetableFragment
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Stetho.initializeWithDefaults(this);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 
@@ -64,6 +62,13 @@ public class MainActivity extends AppCompatActivity implements TimetableFragment
     // Toolbar Title 변경..
     public void setActionBarTitle(String title) {
         toolbar.setTitle(title);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.anim_slide_in_top, R.anim.anim_slide_out_bottom);
+        android.os.Process.killProcess(Process.myPid());
     }
 
     // 계절별로 색깔을 변경,,

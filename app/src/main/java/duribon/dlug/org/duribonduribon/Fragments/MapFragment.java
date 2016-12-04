@@ -334,8 +334,8 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
         TMapMarkerItem item = new TMapMarkerItem();
         item.setTMapPoint(poi.getPOIPoint());
 
-        Bitmap icon = ((BitmapDrawable) ContextCompat.getDrawable(getActivity(), R.drawable.pushpin)).getBitmap();
-        item.setIcon(icon);
+        /* Bitmap icon = ((BitmapDrawable) ContextCompat.getDrawable(getActivity(), R.drawable.pushpin)).getBitmap();
+        item.setIcon(icon); */
         item.setPosition(0.5f, 1);
         item.setCalloutTitle(poi.getPOIName());
         item.setCalloutSubTitle(poi.getPOIContent());
@@ -362,7 +362,9 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     // 데이터 내부 지도로 전송..
                                     Intent intent = new Intent(getActivity(), InteriorMapActivity.class);
+
                                     startActivity(intent);
+                                    getActivity().overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
                                 }
                             });
                             input_room.setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -376,6 +378,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
                             // 시간표에서 데이터 전송,,
                             Intent intent = new Intent(getActivity(), InteriorMapActivity.class);
                             startActivity(intent);
+                            getActivity().overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
                         }
                     }
                 })
