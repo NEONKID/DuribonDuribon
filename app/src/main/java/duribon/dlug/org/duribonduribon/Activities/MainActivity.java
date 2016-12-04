@@ -9,8 +9,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Window;
 
-import com.facebook.stetho.Stetho;
-
 import java.util.Calendar;
 
 import butterknife.ButterKnife;
@@ -23,7 +21,7 @@ import duribon.dlug.org.duribonduribon.Fragments.TimetableFragment;
 /**
  * Created by neonkid on 11/5/16.
  *
- * Application의 메인 Activity..
+ * Application의 Main Activity..
  */
 
 public class MainActivity extends AppCompatActivity implements TimetableFragment.CustomSearchPOI {
@@ -33,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements TimetableFragment
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Stetho.initializeWithDefaults(this);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 

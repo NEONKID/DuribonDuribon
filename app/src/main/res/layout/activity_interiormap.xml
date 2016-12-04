@@ -9,17 +9,6 @@
     android:fitsSystemWindows="true"
     app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-    <!--
-    <android.support.design.widget.CollapsingToolbarLayout
-        android:id="@+id/collapsingToolbarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        app:contentScrim="?attr/colorPrimary"
-        app:expandedTitleMarginEnd="64dp"
-        app:expandedTitleMarginStart="48dp"
-        app:layout_scrollFlags="scroll|exitUntilCollapsed">-->
-
         <ImageView
             android:layout_width="match_parent"
             app:srcCompat="@drawable/firstf"
@@ -36,18 +25,5 @@
             android:clickable="true"
             android:visibility="visible"
             android:src="@drawable/ic_keyboard_backspace_white_24dp" />
-
-        <!--
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="nextFloor"
-            android:id="@+id/nextscene"
-            app:layout_anchor="@+id/entrance"
-            app:layout_anchorGravity="bottom|right"
-            android:layout_gravity="top|left"
-            android:text="Destination Floor" />
-            -->
-
 
 </android.support.design.widget.CoordinatorLayout>
