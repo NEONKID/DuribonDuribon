@@ -3,6 +3,7 @@ package duribon.dlug.org.duribonduribon.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,8 +20,8 @@ import uk.co.senab.photoview.PhotoViewAttacher;
  * 내부 지도를 구현한 Activity,,
  */
 public class InteriorMapActivity extends AppCompatActivity {
-    @InjectView(R.id.collapsingToolbarLayout)
-    CollapsingToolbarLayout collapsingToolbarLayout;    // 내부 지도 레이아웃..
+    @InjectView(R.id.interior_content)
+    CoordinatorLayout coordinatorLayout;    // 내부 지도 레이아웃..
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,6 @@ public class InteriorMapActivity extends AppCompatActivity {
         ButterKnife.inject(this);
 
         MapFragment.room_flag = false;  // 원상 복귀,,
-        collapsingToolbarLayout.setTitle(getString(R.string.Interior_Map));
 
         PhotoViewAttacher attacher;
         ImageView entrance = (ImageView)findViewById(R.id.entrance);
@@ -43,18 +43,17 @@ public class InteriorMapActivity extends AppCompatActivity {
             //버튼을 없애야함.
         }
         */
-
     }
-    
-    public void nextFloor(View v){
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+    }
+
+    public void nextFloor(View v) {
         Intent intent = new Intent(this, DestinationMapActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
     }
-    /*
-    public class OpenCV {
-        static {
-            System.loadLibrary("hello");
-        }
-        public native String getHelloNDKString();
-    }*/
 }
