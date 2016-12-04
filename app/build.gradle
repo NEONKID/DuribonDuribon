@@ -32,4 +32,5 @@ dependencies {
     debugCompile 'com.facebook.stetho:stetho:1.4.1'
     compile files('libs/com.skp.Tmap_1.0.44.jar')
     compile 'com.github.chrisbanes.photoview:library:1.2.3'
+    compile files('libs/android-zoom-view.jar')
 }
