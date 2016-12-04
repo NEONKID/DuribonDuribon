@@ -31,13 +31,6 @@
             android:name=".Activities.InteriorMapActivity"
             android:theme="@style/AppTheme.InteriorMap">
         </activity>
-<<<<<<< HEAD
-=======
-        <activity
-            android:name=".Activities.DestinationMapActivity"
-            android:theme="@style/AppTheme.InteriorMap">
-        </activity>
->>>>>>> 763e886d927e61ef04dd2f69e718e56c04e5bc5b
     </application>
 
 </manifest>

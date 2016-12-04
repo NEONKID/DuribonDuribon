@@ -24,17 +24,28 @@ import android.widget.RelativeLayout;
  * 내부 지도를 구현한 Activity,,
  */
 public class InteriorMapActivity extends AppCompatActivity {
-    CoordinatorLayout coordinatorLayout;    // 내부 지도 레이아웃..
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        String lecture;
+        Intent intent = getIntent();
+        lecture = intent.getExtras().getString("data");
+
+        ImageView imageView = (ImageView)findViewById(R.id.destination);
+
+        if(lecture.charAt(0) ==2)
+        {
+            imageView.setImageResource(R.drawable.testsecond);
+        }
+        else //1층인 경우
+        {
+            //버튼을 없애야함.
+        }
         setContentView(R.layout.activity_interiormap);
-        ButterKnife.inject(this);
 
         MapFragment.room_flag = false;  // 원상 복귀,,
 
-<<<<<<< HEAD
         View v = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.activity_interiormap, null, false);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
@@ -45,21 +56,10 @@ public class InteriorMapActivity extends AppCompatActivity {
 
         CoordinatorLayout container = (CoordinatorLayout) findViewById(R.id.dest_content);
         container.addView(zoomView);
-=======
-        PhotoViewAttacher attacher;
-        ImageView entrance = (ImageView)findViewById(R.id.entrance);
-        attacher = new PhotoViewAttacher(entrance);
 
->>>>>>> 763e886d927e61ef04dd2f69e718e56c04e5bc5b
-        /*if()
-        {
-        //검색 값에 따라서 DestinationMap에서 보여주는 층수를 다르게 해야함
-        }
-        else //1층인 경우
-        {
-            //버튼을 없애야함.
-        }
-        */
+
+
+
     }
 
 
