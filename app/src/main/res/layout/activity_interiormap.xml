@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <android.support.design.widget.CoordinatorLayout
     android:id="@+id/dest_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -9,342 +8,51 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/firstf"
+        android:id="@+id/first"
+        android:visibility="invisible"/>
 
     <ImageView
-        android:layout_width="match_parent"
-        app:srcCompat="@drawable/testsecond"
-        android:id="@+id/destination"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:srcCompat="@drawable/testsecond"
+        android:id="@+id/second"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/thirdf"
+        android:id="@+id/third"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/fourthf"
+        android:id="@+id/fourth"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/fifthf"
+        android:id="@+id/fifth"
+        android:visibility="invisible"
         />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:layout_marginLeft="80dp"
-            android:layout_marginStart="80dp"
-            android:layout_marginBottom="147dp"
-            android:id="@+id/tech216"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:id="@+id/tech215"
-            android:layout_alignTop="@+id/tech216"
-            android:layout_toRightOf="@+id/tech216"
-            android:layout_toEndOf="@+id/tech216" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:id="@+id/tech214"
-            android:layout_alignTop="@+id/tech215"
-            android:layout_toRightOf="@+id/tech215"
-            android:layout_toEndOf="@+id/tech215" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:id="@+id/tech213"
-            android:layout_alignTop="@+id/tech214"
-            android:layout_toRightOf="@+id/tech214"
-            android:layout_toEndOf="@+id/tech214" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox"
-            android:layout_marginRight="32dp"
-            android:layout_marginEnd="32dp"
-            android:id="@+id/tech217"
-            android:layout_alignTop="@+id/tech216"
-            android:layout_toLeftOf="@+id/tech215"
-            android:layout_toStartOf="@+id/tech215" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox"
-            android:layout_marginBottom="27dp"
-            android:id="@+id/tech218"
-            android:layout_above="@+id/tech217"
-            android:layout_alignLeft="@+id/tech217"
-            android:layout_alignStart="@+id/tech217" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:id="@+id/tech211"
-            android:layout_alignTop="@+id/tech212"
-            android:layout_toRightOf="@+id/tech212"
-            android:layout_toEndOf="@+id/tech212" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:id="@+id/tech210"
-            android:layout_alignTop="@+id/tech211"
-            android:layout_toRightOf="@+id/tech211"
-            android:layout_toEndOf="@+id/tech211" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:id="@+id/tech209"
-            android:layout_alignTop="@+id/tech210"
-            android:layout_toRightOf="@+id/tech210"
-            android:layout_toEndOf="@+id/tech210" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:layout_alignBottom="@+id/tech209"
-            android:layout_toRightOf="@+id/tech209"
-            android:layout_toEndOf="@+id/tech209"
-            android:id="@+id/tech208" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:id="@+id/tech207"
-            android:layout_alignTop="@+id/tech208"
-            android:layout_toRightOf="@+id/tech208"
-            android:layout_toEndOf="@+id/tech208" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:id="@+id/tech205"
-            android:layout_alignTop="@+id/tech206"
-            android:layout_toRightOf="@+id/tech206"
-            android:layout_toEndOf="@+id/tech206" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:id="@+id/tech204"
-            android:layout_alignTop="@+id/tech205"
-            android:layout_toRightOf="@+id/tech205"
-            android:layout_toEndOf="@+id/tech205" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:id="@+id/tech203"
-            android:layout_alignTop="@+id/tech204"
-            android:layout_toRightOf="@+id/tech204"
-            android:layout_toEndOf="@+id/tech204" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:id="@+id/tech202"
-            android:layout_alignTop="@+id/tech203"
-            android:layout_toRightOf="@+id/tech203"
-            android:layout_toEndOf="@+id/tech203" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:id="@+id/tech201"
-            android:layout_alignTop="@+id/tech202"
-            android:layout_toRightOf="@+id/tech202"
-            android:layout_toEndOf="@+id/tech202" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:id="@+id/tech206"
-            android:layout_alignTop="@+id/tech207"
-            android:layout_toRightOf="@+id/tech207"
-            android:layout_toEndOf="@+id/tech207" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:layout_marginLeft="12dp"
-            android:layout_marginStart="12dp"
-            android:id="@+id/tech212"
-            android:layout_alignTop="@+id/tech213"
-            android:layout_toRightOf="@+id/tech213"
-            android:layout_toEndOf="@+id/tech213" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:id="@+id/tech228"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/tech201"
-            android:layout_toEndOf="@+id/tech201"
-            android:layout_marginLeft="19dp"
-            android:layout_marginStart="19dp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:id="@+id/tech227"
-            android:layout_above="@+id/tech228"
-            android:layout_alignLeft="@+id/tech228"
-            android:layout_alignStart="@+id/tech228"
-            android:layout_marginBottom="12dp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:layout_marginBottom="27dp"
-            android:id="@+id/tech226"
-            android:layout_above="@+id/tech227"
-            android:layout_alignLeft="@+id/tech227"
-            android:layout_alignStart="@+id/tech227" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox3"
-            android:layout_marginRight="103dp"
-            android:layout_marginEnd="103dp"
-            android:layout_marginBottom="197dp"
-            android:id="@+id/tech222_2"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:id="@+id/tech231"
-            android:layout_marginLeft="17dp"
-            android:layout_marginStart="17dp"
-            android:layout_above="@+id/tech222_2"
-            android:layout_alignLeft="@+id/tech222_2"
-            android:layout_alignStart="@+id/tech222_2"
-            android:layout_marginBottom="10dp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:id="@+id/tech230"
-            android:layout_below="@+id/tech231"
-            android:layout_alignLeft="@+id/tech231"
-            android:layout_alignStart="@+id/tech231" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox"
-            android:id="@+id/tech222_1"
-            android:layout_marginRight="36dp"
-            android:layout_marginEnd="36dp"
-            android:layout_alignTop="@+id/tech222_2"
-            android:layout_toLeftOf="@+id/tech222_2"
-            android:layout_toStartOf="@+id/tech222_2" />
-
-    </RelativeLayout>
-
     <android.support.design.widget.FloatingActionButton
-            android:id="@+id/Previous"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end|right"
-            android:onClick="Previousbutton"
-            android:clickable="true"
-            android:visibility="visible"
-            android:src="@drawable/ic_keyboard_backspace_white_24dp"
-            android:rotation="180"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+        android:id="@+id/previous"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end|right"
+        android:layout_margin="10dp"
+        android:clickable="true"
+        android:visibility="visible"
+        android:rotation="180"
+        android:onClick="Previousbutton"
+        android:src="@drawable/ic_keyboard_backspace_white_24dp" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:id="@+id/tech220"
-            android:layout_alignTop="@+id/tech219"
-            android:layout_toRightOf="@+id/tech219"
-            android:layout_toEndOf="@+id/tech219"
-            android:layout_marginLeft="14dp"
-            android:layout_marginStart="14dp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:layout_marginBottom="27dp"
-            android:id="@+id/tech225"
-            android:layout_above="@+id/tech224"
-            android:layout_alignLeft="@+id/tech224"
-            android:layout_alignStart="@+id/tech224" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:id="@+id/tech223"
-            android:layout_centerVertical="true"
-            android:layout_alignLeft="@+id/tech224"
-            android:layout_alignStart="@+id/tech224" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:layout_marginBottom="25dp"
-            android:id="@+id/tech224"
-            android:layout_marginRight="91dp"
-            android:layout_marginEnd="91dp"
-            android:layout_above="@+id/tech223"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/desbox2"
-            android:id="@+id/tech219"
-            android:layout_marginLeft="119dp"
-            android:layout_marginStart="119dp"
-            android:layout_below="@+id/tech223"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="28dp" />
-    </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
