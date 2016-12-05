@@ -399,8 +399,9 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
                             input_room.setOnDismissListener(new DialogInterface.OnDismissListener() {
                                 @Override
                                 public void onDismiss(DialogInterface dialogInterface) {
-                                    if(!editText.getText().toString().trim().equals("") && dig_flag != false) {
+                                    if(!editText.getText().toString().trim().equals("") && dig_flag) {
                                         settheFloor.setFloor(editText.getText().toString());
+                                        dig_flag = false;
                                     }
                                 }
                             });
