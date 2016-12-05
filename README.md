@@ -1,9 +1,14 @@
 # DuribonDuribon
 
-Dankook University Cheonan Campus route guide application
+##	OverView
 
-OS: Supported Android JellyBean ~ Nugar
+Dankook University Cheonan Campus route guide application (Google Android)
 
-Used API: TMap API, ButterKnife, Facebook Stetho, Android Espresso
 
-Developed by: Kwang Soo Jeong (NEONKID), Jun Hyeong Kim (Imblock), Dow Hyn Kim 
+## Application Info
+
+Supported OS:  Android JellyBean ~ Nugar
+
+Used Library: TMap API, ButterKnife, Facebook Stetho, Android Espresso
+
+Developed by: Kwang Soo Jeong (Neon K.I.D), Jun Hyeong Kim (Imblock), Dow Hyn Kim 
