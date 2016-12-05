@@ -11,6 +11,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -43,6 +44,7 @@ import com.skp.Tmap.TMapView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Map;
 
 import butterknife.ButterKnife;
@@ -136,6 +138,17 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
                     tMapView.setMapType(TMapView.MAPTYPE_STANDARD);
                     tMapView.setTrafficInfo(true);  // TMap 교통 정보..
 
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        Locale mLocale = getResources().getConfiguration().getLocales().get(0);
+                        if(mLocale.getLanguage().contains("en")) {
+                            tMapView.setTileType(TMapView.TILETYPE_ENGLISHTILE);
+                        }
+                    } else {
+                        Locale mLocale = getResources().getConfiguration().locale;
+                        if(mLocale.getLanguage().contains("en")) {
+                            tMapView.setTileType(TMapView.TILETYPE_ENGLISHTILE);
+                        }
+                    }
                     tMapView.setSightVisible(true);
                     tMapView.setTMapLogoPosition(TMapView.TMapLogoPositon.POSITION_BOTTOMLEFT);
                     tMapView.setIconVisibility(true);
@@ -229,13 +242,13 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
         단국대학교 각 단과 대학 검색을 위해 이용합니다.
      */
     private String Searchcheck(String query) {
-        String result = "단국대학교";
+        String result = "단국대 ";
         boolean flag = false;
         if(map.isEmpty()) {
             setMapData();
         }
 
-        if(query.startsWith("단국대학교".substring(0,1))) {
+        if(query.startsWith("단국대 ".substring(0,1))) {
             result = "";
         }
 
@@ -340,8 +353,8 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
         TMapMarkerItem item = new TMapMarkerItem();
         item.setTMapPoint(poi.getPOIPoint());
 
-        /* Bitmap icon = ((BitmapDrawable) ContextCompat.getDrawable(getActivity(), R.drawable.pushpin)).getBitmap();
-        item.setIcon(icon); */
+        Bitmap icon = ((BitmapDrawable) ContextCompat.getDrawable(getActivity(), R.drawable.pushpin)).getBitmap();
+        item.setIcon(icon);
         item.setPosition(0.5f, 1);
         item.setCalloutTitle(poi.getPOIName());
         item.setCalloutSubTitle(poi.getPOIContent());
@@ -418,6 +431,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
         map.put("학생회관", "천안 우체국");
         map.put("우체국", "천안 우체국");
         map.put("스포츠과학대학", "체육대학");
+        map.put("기숙사", "천안 생활관");
     }
 
     @Override
