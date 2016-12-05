@@ -8,14 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 import duribon.dlug.org.duribonduribon.Fragments.MapFragment;
 import duribon.dlug.org.duribonduribon.R;
 import pl.polidea.view.ZoomView;
 import android.view.LayoutInflater;
 import android.content.Context;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 /**
@@ -24,6 +21,7 @@ import android.widget.RelativeLayout;
  * 내부 지도를 구현한 Activity,,
  */
 public class InteriorMapActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +33,7 @@ public class InteriorMapActivity extends AppCompatActivity {
 
         ImageView imageView = (ImageView)findViewById(R.id.destination);
 
-        if(lecture.charAt(0) ==2) {
+        if(lecture.charAt(0) == 2) {
             imageView.setImageResource(R.drawable.testsecond);
         }
         else { //1층인 경우

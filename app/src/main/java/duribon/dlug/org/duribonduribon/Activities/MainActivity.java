@@ -1,5 +1,6 @@
 package duribon.dlug.org.duribonduribon.Activities;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Process;
 import android.support.v4.app.FragmentManager;
@@ -24,7 +25,7 @@ import duribon.dlug.org.duribonduribon.Fragments.TimetableFragment;
  * Application의 Main Activity..
  */
 
-public class MainActivity extends AppCompatActivity implements TimetableFragment.CustomSearchPOI {
+public class MainActivity extends AppCompatActivity implements TimetableFragment.CustomSearchPOI, MapFragment.comFloor {
     @InjectView(R.id.main_tool_bar)
     Toolbar toolbar;
 
@@ -97,5 +98,13 @@ public class MainActivity extends AppCompatActivity implements TimetableFragment
         fragmentTransaction.addToBackStack(null);   // BackStack을 통해 해당 Fragment를 스택에서 빼옴..
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void setFloor(String floor) {
+        Intent intent = new Intent(this, InteriorMapActivity.class);
+        intent.putExtra("data", floor);
+        startActivity(intent);
+        overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
     }
 }

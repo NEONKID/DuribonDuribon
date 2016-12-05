@@ -32,7 +32,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.skp.Tmap.TMapData;
 import com.skp.Tmap.TMapMarkerItem;
@@ -65,6 +64,8 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
     private TMapPoint src, dst;
     private LocationManager mLocationManager;   // 현재 위치 서비스하는 매니저,,
     public static boolean room_flag = false;
+    private comFloor settheFloor;
+    private boolean dig_flag = false;
 
     View view;
 
@@ -74,7 +75,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
     @InjectView(R.id.location_me)
     FloatingActionButton location_me;   // 경로 탐색시 나타나는 동그라미 버튼..
 
-    public interface settheFloor {
+    public interface comFloor {
         void setFloor(String floor);
     }
 
@@ -115,6 +116,11 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        try {
+            settheFloor = (comFloor)context;
+        } catch (ClassCastException ex) {
+            throw new ClassCastException(context.toString() + "must implement comFloor");
+        }
     }
 
     @Override
@@ -381,16 +387,21 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     // 데이터 내부 지도로 전송...
-                                    Intent intent = new Intent(getActivity(), InteriorMapActivity.class);
-                                    intent.putExtra("data", editText.getText());
-                                    startActivity(intent);
-                                    getActivity().overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                                    dig_flag = true;
                                 }
                             });
                             input_room.setNegativeButton("취소", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     // 그냥 아무 작업 안함,,
+                                }
+                            });
+                            input_room.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                @Override
+                                public void onDismiss(DialogInterface dialogInterface) {
+                                    if(!editText.getText().toString().trim().equals("") && dig_flag != false) {
+                                        settheFloor.setFloor(editText.getText().toString());
+                                    }
                                 }
                             });
                             input_room.show();
