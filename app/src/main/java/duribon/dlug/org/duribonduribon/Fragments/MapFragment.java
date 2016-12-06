@@ -439,7 +439,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
         map.put("사회과학관", "법정대학");
         map.put("도서관", "율곡기념관");
         map.put("약대", "약학관");
-        map.put("약학대학", "약학관");
+        map.put("약학대학", "천안 약학관");
         map.put("학생회관", "천안 우체국");
         map.put("우체국", "천안 우체국");
         map.put("스포츠과학대학", "체육대학");
