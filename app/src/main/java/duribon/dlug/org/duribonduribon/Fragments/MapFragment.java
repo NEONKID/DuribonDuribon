@@ -65,7 +65,6 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
     private LocationManager mLocationManager;   // 현재 위치 서비스하는 매니저,,
     public static boolean room_flag = false;
     private comFloor settheFloor;
-    private boolean dig_flag = false;
 
     View view;
 
@@ -377,17 +376,15 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
                 .setAction("OK", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(!room_flag) {
-                            final AlertDialog.Builder input_room = new AlertDialog.Builder(getActivity());
-                            final LinearLayout dig_layout2 = (LinearLayout)View.inflate(getActivity(), R.layout.fragment_innerdialog, null);
-                            final EditText editText = (EditText)dig_layout2.findViewById(R.id.dialog_input_classroom);
-                            input_room.setTitle("강의실 입력");
-                            input_room.setView(dig_layout2);
-                            input_room.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        final AlertDialog.Builder input_room = new AlertDialog.Builder(getActivity());
+                        final LinearLayout dig_layout2 = (LinearLayout)View.inflate(getActivity(), R.layout.fragment_innerdialog, null);
+                        final EditText editText = (EditText)dig_layout2.findViewById(R.id.dialog_input_classroom);
+                        input_room.setTitle("강의실 입력");
+                        input_room.setView(dig_layout2);
+                        input_room.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     // 데이터 내부 지도로 전송...
-                                    dig_flag = true;
                                 }
                             });
                             input_room.setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -399,19 +396,12 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
                             input_room.setOnDismissListener(new DialogInterface.OnDismissListener() {
                                 @Override
                                 public void onDismiss(DialogInterface dialogInterface) {
-                                    if(!editText.getText().toString().trim().equals("") && dig_flag) {
+                                    if(!editText.getText().toString().trim().equals("")) {
                                         settheFloor.setFloor(editText.getText().toString());
-                                        dig_flag = false;
                                     }
                                 }
                             });
                             input_room.show();
-                        } else {
-                            // 시간표에서 데이터 전송,,
-                            Intent intent = new Intent(getActivity(), InteriorMapActivity.class);
-                            startActivity(intent);
-                            getActivity().overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
-                        }
                     }
                 })
                 .setActionTextColor(getResources().getColor(R.color.color_primary))
@@ -439,7 +429,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, Searc
         map.put("사회과학관", "법정대학");
         map.put("도서관", "율곡기념관");
         map.put("약대", "약학관");
-        map.put("약학대학", "천안 약학관");
+        map.put("약학대학", "약학관");
         map.put("학생회관", "천안 우체국");
         map.put("우체국", "천안 우체국");
         map.put("스포츠과학대학", "체육대학");
