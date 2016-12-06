@@ -1,6 +1,6 @@
 # DuribonDuribon
 
-##	OverView
+##	Overview
 
 Dankook University Cheonan Campus route guide application (Google Android)
 
