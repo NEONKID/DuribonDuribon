@@ -1,13 +1,25 @@
 language: android
+sudo: required
 jdk: oraclejdk8
 os: 
   - linux
 
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    
 env:
   global:
-    - ANDROID_API = 24
-    - EMULATOR_API = 21
-    - ANDROID_API_BUILD_TOOLS = 25.0.0
+    - ANDROID_API=25
+    - EMULATOR_API=22
+    - ANDROID_API_BUILD_TOOLS=25.0.2
+    - ANDROID_ABI=armeabi-v7a
+#   - ADB_INSTALL_TIMEOUT = 20 # minutes (2 minutes by default)
 
 android:
   components: 
@@ -15,19 +27,22 @@ android:
     - platform-tools
     - build-tools-$ANDROID_BUILD_TOOLS
     - android-$ANDROID_API
-    - android-$EMULATOR_API_LEVEL
+    - android-$EMULATOR_API
     - extra-google-m2repository
     - extra-android-m2repository # for design library
-    # - addon-google_apis-google-19 # google play services
+    - addon-google_apis-google-$ANDROID_API # google APIs
+    - extra-android-support     # Support library
+    - sys-img-armeabi-v7a-android-$EMULATOR_API
+    - sys-img-armeabi-v7a-google-apis-$ANDROID_API
+    #- extra-google-google_play_services
     #- sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
-    - sys-img-armeabi-v7a-android-$ANDROID_API_LEVEL
-    - sys-img-armeabi-v7a-android-$EMULATOR_API_LEVEL
     #- sys-img-armeabi-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
 
   licenses:
-    - 'android-sdk-preview-license-.+'
-    - 'android-sdk-license-.+'
-    - 'google-gdk-license-.+'
+    - 'android-sdk-license.*'
+
+script:
+  - ./gradlew build
 
 # Android BUILD TOOLS 25.0 이상 사용시 적용
 before_install:
@@ -37,7 +52,10 @@ before_install:
 
 # Run Android Emulator...
 before_script:
-  - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
-  - emulator -avd test -no-skin -no-audio -no-window &
+  - echo no | android create avd --force -n test -t android-$EMULATOR_API --abi $ANDROID_ABI
+  - emulator -avd test -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
+
+notifications:
+    slack: byneonkid:$SLACK_TOKEN
